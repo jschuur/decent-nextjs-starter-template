@@ -19,3 +19,5 @@ git clone https://github.com/jschuur/decent-nextjs-starter-template
   - More at [awesome-shadcn-ui](https://github.com/birobirobiro/awesome-shadcn-ui).
 - [React Hook Form](https://react-hook-form.com/): Performant, flexible and extensible forms with easy-to-use validation ([docs](https://react-hook-form.com/get-started)).
 - [Zod](https://zod.dev/): TypeScript-first schema validation with static type inference.
+- [Drizzle](https://orm.drizzle.team/): Database ORM with TypeScript support ([docs](https://orm.drizzle.team/docs/overview)).
+  - Extensions: [Drizzle ORM snippets (VS Code)](https://marketplace.visualstudio.com/items?itemName=imgildev.vscode-drizzle-snippets) by [Manuel Gil](https://github.com/ManuelGil), [Drizzle Studio Chrome](https://chromewebstore.google.com/detail/drizzle-studio/mjkojjodijpaneehkgmeckeljgkimnmd?hl=en).
