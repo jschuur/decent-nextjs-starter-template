@@ -17,6 +17,7 @@
     "check": "tsc --noEmit"
   },
   "dependencies": {
+    "@fontsource/space-grotesk": "^5.0.18",
     "@hookform/resolvers": "^3.6.0",
     "@libsql/client": "^0.6.2",
     "@radix-ui/react-avatar": "^1.0.4",

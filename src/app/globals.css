@@ -73,4 +73,28 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-header;
+  }
+
+  h1 {
+    @apply text-xl sm:text-2xl font-semibold pb-1;
+  }
+
+  h2 {
+    @apply text-lg sm:text-xl font-medium pb-1;
+  }
+
+  p:not(:last-child) {
+    @apply mb-1.5;
+  }
+
+  p {
+    @apply text-slate-700;
+  }
+
+  p > a {
+    @apply text-link;
+  }
 }

@@ -1,9 +1,14 @@
 import type { Metadata } from 'next';
 import { Inter as FontSans } from 'next/font/google';
+
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/600.css';
 import './globals.css';
 
 import Providers from '@/components/Providers/Providers';
 import Footer from '@/components/Site/Footer';
+import Header from '@/components/Site/Header';
 
 import { cn } from '@/lib/utils';
 
@@ -27,10 +32,9 @@ export default function RootLayout({
       <head />
       <body className={cn('min-h-screen bg-blue-50 font-sans antialiased', fontSans.variable)}>
         <Providers>
-          <main className='container max-w-5xl mx-auto py-4'>
-            {children}
-            <Footer />
-          </main>
+          <Header />
+          <main className='container max-w-5xl py-4 px-4 sm:px-8'>{children}</main>
+          <Footer />
         </Providers>
       </body>
     </html>

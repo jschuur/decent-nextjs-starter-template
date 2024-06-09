@@ -5,6 +5,7 @@ import { stackItems } from '@/db/schema';
 
 const stackItemSchemaOptions = {
   createdAt: z.coerce.date(),
+  tags: z.array(z.string()),
 };
 
 export const stackItemSchema = createSelectSchema(stackItems, stackItemSchemaOptions);

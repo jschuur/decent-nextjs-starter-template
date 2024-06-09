@@ -9,6 +9,10 @@ export const stackItems = sqliteTable('stack_item', {
   name: text('name'),
   link: text('link'),
   description: text('description'),
+  tags: text('tags', { mode: 'json' })
+    .notNull()
+    .$type<string[]>()
+    .default(sql`'[]'`),
   order: integer('position'),
   createdAt: integer('createdAt', { mode: 'timestamp_ms' })
     .notNull()

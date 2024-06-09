@@ -1,6 +1,7 @@
 'use client';
 import { FileTextIcon } from 'lucide-react';
 
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -11,7 +12,21 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
+import { cn } from '@/lib/utils';
+
 import { StackItem } from '@/lib/types';
+
+const badgeColors = {
+  css: 'bg-pink-300',
+  tooling: 'bg-blue-300',
+  database: 'bg-green-300',
+  utility: 'bg-purple-300',
+  framework: 'bg-amber-300',
+  state: 'bg-indigo-300',
+  ui: 'bg-cyan-300',
+  typescript: 'bg-orange-300',
+  authentication: 'bg-teal-300',
+};
 
 type Props = {
   item: StackItem;
@@ -22,6 +37,19 @@ export default function StackItemEntry({ item }: Props) {
       <CardHeader className='grid grid-cols-subgrid grid-rows-subgrid'>
         <CardTitle>
           {item.name}
+          <div className='flex flex-row gap-2 pt-3'>
+            {item.tags.map((tag) => (
+              <Badge
+                key={tag}
+                className={cn(
+                  badgeColors[tag as keyof typeof badgeColors] || 'bg-red-300',
+                  'text-gray-800 font-medium tracking-wider uppercase text-xs pointer-events-none'
+                )}
+              >
+                {tag}
+              </Badge>
+            ))}
+          </div>
         </CardTitle>
       </CardHeader>
       <CardContent className='grid grid-cols-subgrid grid-rows-subgrid'>
@@ -29,12 +57,12 @@ export default function StackItemEntry({ item }: Props) {
       </CardContent>
       {item.link && (
         <CardFooter className='grid grid-cols-subgrid grid-rows-subgrid'>
-          <Button variant='secondary' className='bg-blue-100 hover:bg-blue-200'>
-            <FileTextIcon className='mr-2' size={16} />
-            <a href={item.link} target='_blank' rel='noopener noreferrer'>
+          <a href={item.link} target='_blank' rel='noopener noreferrer' tabIndex={-1}>
+            <Button variant='secondary' className='w-full bg-blue-100 hover:bg-blue-200'>
+              <FileTextIcon className='mr-2' size={16} />
               Documentation
-            </a>
-          </Button>
+            </Button>
+          </a>
         </CardFooter>
       )}
     </Card>
