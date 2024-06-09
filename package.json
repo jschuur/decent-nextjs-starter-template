@@ -11,6 +11,13 @@
     "db:migrate": "drizzle-kit migrate",
     "db:migrate:preview": "dotenv -e .env.preview -- drizzle-kit migrate",
     "db:migrate:prod": "dotenv -e .env.production -- drizzle-kit migrate",
+    "db:shell": "turso db shell http://127.0.0.1:8080",
+    "db:shell:preview": "turso db shell decent-nextjs-starter-template-preview",
+    "db:shell:prod": "turso db shell decent-nextjs-starter-template",
+    "db:dump": "turso db shell http://127.0.0.1:8080 .dump > db/exports/backup_`date -u +\"%Y-%m-%dT%H-%M-%S\"`.sql",
+    "db:dump:preview": "turso db shell decent-nextjs-starter-template-preview .dump > db/exports/backup_preview_`date -u +\"%Y-%m-%dT%H-%M-%S\"`.sql",
+    "db:dump:prod": "turso db shell decent-nextjs-starter-template .dump > db/exports/backup_prod_`date -u +\"%Y-%m-%dT%H-%M-%S\"`.sql",
+    "db:seed": "cat db/sample_data.sql | turso db shell http://127.0.0.1:8080",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -33,7 +40,6 @@
     "@radix-ui/react-tabs": "^1.0.4",
     "@radix-ui/react-tooltip": "^1.0.7",
     "@tabler/icons-react": "^3.5.0",
-    "better-sqlite3": "^11.0.0",
     "boolean": "^3.2.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -51,7 +57,8 @@
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^9.0.1",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zod-validation-error": "^3.3.0"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.10",

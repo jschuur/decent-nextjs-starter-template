@@ -1,9 +1,26 @@
-import Database from 'better-sqlite3';
+import { createClient } from '@libsql/client/web';
 import { boolean } from 'boolean';
-import { drizzle } from 'drizzle-orm/better-sqlite3';
-
-const sqlite = new Database(process.env.DATABASE_URL as string);
+import { drizzle } from 'drizzle-orm/libsql';
 
 import * as schema from '@/db/schema';
 
-export const db = drizzle(sqlite, { schema, logger: boolean(process.env.DATABASE_DEBUG) });
+const authToken = process.env.DATABASE_AUTH_TOKEN;
+const url = process.env.DATABASE_URL;
+
+if (!url) {
+  throw new Error('DATABASE_URL is not defined');
+}
+
+if (url?.startsWith('libsql://') && !authToken) {
+  throw new Error('DATABASE_AUTH_TOKEN is not defined');
+}
+
+const client = createClient({
+  url,
+  authToken,
+});
+
+export const db = drizzle(client, {
+  schema,
+  logger: boolean(process.env.DATABASE_DEBUG),
+});

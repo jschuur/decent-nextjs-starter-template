@@ -13,7 +13,7 @@ export const stackItems = sqliteTable('stack_item', {
     .notNull()
     .$type<string[]>()
     .default(sql`'[]'`),
-  order: integer('position'),
+  position: integer('position'),
   createdAt: integer('createdAt', { mode: 'timestamp_ms' })
     .notNull()
     .default(sql`(unixepoch() * 1000)`),
