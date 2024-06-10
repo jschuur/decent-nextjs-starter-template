@@ -1,6 +1,6 @@
 import { getStackItems } from '@/db/queries';
 
-import StackItem from '@/components/StackItem';
+import StackItem from '@/components/Template/StackItem';
 
 export default async function Stack() {
   const stackItems = await getStackItems();
