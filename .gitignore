@@ -38,3 +38,10 @@ next-env.d.ts
 
 # Uncomment once you start to use your own local SQLite database, so it doesn't end up in the git repository
 /db/dev.*
+
+# sst
+.sst
+
+
+# open-next
+.open-next

@@ -20,4 +20,7 @@ git clone https://github.com/jschuur/decent-nextjs-starter-template
 - [React Hook Form](https://react-hook-form.com/): Performant, flexible and extensible forms with easy-to-use validation ([docs](https://react-hook-form.com/get-started)).
 - [Zod](https://zod.dev/): TypeScript-first schema validation with static type inference.
 - [Drizzle](https://orm.drizzle.team/): Database ORM with TypeScript support ([docs](https://orm.drizzle.team/docs/overview)).
+  - Configured for [Turso](https://turso.tech) for local and production SQLite databases ([docs](https://docs.turso.tech/introduction)).
   - Extensions: [Drizzle ORM snippets (VS Code)](https://marketplace.visualstudio.com/items?itemName=imgildev.vscode-drizzle-snippets) by [Manuel Gil](https://github.com/ManuelGil), [Drizzle Studio Chrome](https://chromewebstore.google.com/detail/drizzle-studio/mjkojjodijpaneehkgmeckeljgkimnmd?hl=en).
+- [SST (Ion)](https://ion.sst.dev/): Deployment framework for AWS/Cloudflare with OpenNext support ([docs](https://ion.sst.dev/docs/start/aws/nextjs)).
+- [T3 Env](https://env.t3.gg/): Type-safe environment variables ([docs](https://env.t3.gg/docs/introduction)).
