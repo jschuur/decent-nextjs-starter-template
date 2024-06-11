@@ -15,6 +15,10 @@ export default $config({
         SST_STAGE: $app.stage,
         DATABASE_URL: env.DATABASE_URL,
         DATABASE_DEBUG: env.DATABASE_DEBUG,
+        AUTH_SECRET: env.AUTH_SECRET,
+        AUTH_GOOGLE_ID: env.AUTH_GOOGLE_ID,
+        AUTH_GOOGLE_SECRET: env.AUTH_GOOGLE_SECRET,
+        AUTH_DEBUG: env.AUTH_DEBUG,
       },
     };
 

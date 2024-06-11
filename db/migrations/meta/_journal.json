@@ -15,6 +15,13 @@
       "when": 1717868731665,
       "tag": "0001_famous_ogun",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1718097194309,
+      "tag": "0002_lush_exodus",
+      "breakpoints": true
     }
   ]
 }
