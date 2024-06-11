@@ -26,3 +26,4 @@ git clone https://github.com/jschuur/decent-nextjs-starter-template
 - [T3 Env](https://env.t3.gg/): Type-safe environment variables ([docs](https://env.t3.gg/docs/introduction)).
 - [Auth.js](https://authjs.dev/) Authentication library ([docs](https://authjs.dev/getting-started/installation?framework=next.js)).
   - via [Drizzle adapter](https://authjs.dev/getting-started/adapters/drizzle)
+- [Google Analytics](https://analytics.google.com/): Via @next/third-parties ([docs](https://nextjs.org/docs/messages/next-script-for-ga)).

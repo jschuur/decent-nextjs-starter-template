@@ -8,6 +8,7 @@ import './globals.css';
 
 import Providers from '@/components/Providers/Providers';
 import Footer from '@/components/Site/Footer';
+import GoogleAnalytics from '@/components/Site/GoogleAnalytics';
 import Header from '@/components/Site/Header';
 
 import { auth } from '@/auth';
@@ -44,6 +45,8 @@ export default async function RootLayout({
           <main className='container max-w-5xl py-4 px-4 sm:px-8 grow'>{children}</main>
           <Footer />
         </Providers>
+
+        <GoogleAnalytics />
       </body>
     </html>
   );

@@ -1,26 +1,15 @@
 import { createClient } from '@libsql/client/web';
-import { boolean } from 'boolean';
 import { drizzle } from 'drizzle-orm/libsql';
 
 import * as schema from '@/db/schema';
-
-const authToken = process.env.DATABASE_AUTH_TOKEN;
-const url = process.env.DATABASE_URL;
-
-if (!url) {
-  throw new Error('DATABASE_URL is not defined');
-}
-
-if (url?.startsWith('libsql://') && !authToken) {
-  throw new Error('DATABASE_AUTH_TOKEN is not defined');
-}
+import { env } from '@/env';
 
 const client = createClient({
-  url,
-  authToken,
+  url: env.DATABASE_URL,
+  authToken: env.DATABASE_AUTH_TOKEN,
 });
 
 export const db = drizzle(client, {
   schema,
-  logger: boolean(process.env.DATABASE_DEBUG),
+  logger: env.DATABASE_DEBUG,
 });

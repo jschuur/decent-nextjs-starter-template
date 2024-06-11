@@ -1,4 +1,6 @@
 /// <reference path="./.sst/platform/config.d.ts" />
+import dotenv from 'dotenv';
+
 import { env } from './src/env';
 
 export default $config({
@@ -10,25 +12,17 @@ export default $config({
     };
   },
   async run() {
+    const envFile = $dev ? '.env' : `.env.${$app.stage}`;
+    const { parsed: environment } = dotenv.config({ path: envFile });
+
     const config: sst.aws.NextjsArgs = {
       environment: {
         SST_STAGE: $app.stage,
-        DATABASE_URL: env.DATABASE_URL,
-        DATABASE_DEBUG: env.DATABASE_DEBUG,
-        AUTH_SECRET: env.AUTH_SECRET,
-        AUTH_GOOGLE_ID: env.AUTH_GOOGLE_ID,
-        AUTH_GOOGLE_SECRET: env.AUTH_GOOGLE_SECRET,
-        AUTH_DEBUG: env.AUTH_DEBUG,
+        ...environment,
       },
     };
 
     if (!$dev) {
-      if (env.DATABASE_AUTH_TOKEN)
-        config.environment = {
-          ...config.environment,
-          DATABASE_AUTH_TOKEN: env.DATABASE_AUTH_TOKEN,
-        };
-
       if (env.SITE_DOMAIN) config.domain = env.SITE_DOMAIN;
       if (env.WARM > 0) config.warm = env.WARM;
     }

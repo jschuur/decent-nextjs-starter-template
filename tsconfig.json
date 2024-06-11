@@ -29,7 +29,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/sst.config.ts"
+    "src/sst.config.ts",
+    "src/test.js"
   ],
   "exclude": ["node_modules", "sst.config.ts"]
 }
