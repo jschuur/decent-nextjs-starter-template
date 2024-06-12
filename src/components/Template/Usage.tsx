@@ -5,7 +5,7 @@ export default async function Usage() {
       <p>
         Clone <a href='https://github.com/jschuur/decent-nextjs-starter-template?'>GitHub repo</a>.
         Run (p)npm install. Check{' '}
-        <a href='https://github.com/jschuur/decent-nextjs-starter-template?tab=readme-ov-file#decent-nextjs-starter-template'>
+        <a href='https://github.com/jschuur/decent-nextjs-starter-template?tab=readme-ov-file#usage'>
           README
         </a>{' '}
         for more instructions. Start building.
