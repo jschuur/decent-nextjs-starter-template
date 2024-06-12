@@ -6,9 +6,25 @@ By [Joost Schuur](https://joostschuur.com) ([Twitter](https://twitter.com/joosts
 
 ## Usage
 
+Not much here yet, but if you're taking an early look, start by cloning the repository:
+
 ```
 git clone https://github.com/jschuur/decent-nextjs-starter-template
 ```
+
+1. Install dependencies: `pnpm install`.
+2. Rename `decent-nextjs-starter-template` in `package.json` to your project name.
+3. Optionally [set up Turso](https://docs.turso.tech/quickstart). Local development will work fine without it.
+4. Copy `.env.example` to `.env` and fill in the values as desired.
+5. Run `pnpm dev` to start the development server. Visit http://localhost:3000.
+6. With the dev server running, run `pnpm run db:migrate` to set up the database. The dev script also runs the local Turso database instance. You can also run `pnpm run dev:db:turso` to run that separately.
+7. Populate the sample data with `pnpm run db:seed`. Refresh the local page to see the stack list loaded from the database.
+8. For SST based [live development](https://ion.sst.dev/docs/live/), set up your AWS credentials manually in `~/aws/credentials` or [via their CLI](https://docs.aws.amazon.com/cli/v1/userguide/cli-chap-configure.html). If you don't want to use SST just yet, you can run local dev via `pnpm run dev-nosst`.
+9. For Auth.js, set up credentials for the [Google Provider](https://next-auth.js.org/providers/google) for `AUTH_GOOGLE_ID` and `AUTH_GOOGLE_SECRET` (or update `auth.ts` to use a different one). Don't forget the random `AUTH_SECRET` string.
+10. Test auth via the login button in the header. If you see an error, you might not have set the correct URLs for your Google OAuth credentials for 'Authorized JavaScript origins' (http://localhost:3000) and 'Authorized redirect URIs' (http://localhost:3000/api/auth/callback/google).
+11. To deploy, run `pnpm run deploy` (for a staging build) or `pnpm run deploy:prod`. This deploys to AWS via SST. Cloudflare deploys are also supported by SST Ion. Or use the Vercel CLI to [deploy to Vercel](https://vercel.com/docs/cli/deploy).
+
+Substitute `pnpm` for your package manager of choice (npm, bun, yarn etc).
 
 ## Stack
 

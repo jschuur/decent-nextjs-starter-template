@@ -6,8 +6,8 @@ export default function News() {
       <AlertTitle>Work in Progress</AlertTitle>
       <AlertDescription>
         <p>
-          Coming soon: Auth.js, TanStack Query with hydration, nav menu, Sentry/Google Analytics and
-          misc UI helper hooks.
+          Coming soon: TanStack Query with hydration, nav menu, Sentry/Google Analytics and misc UI
+          helper hooks.
         </p>
       </AlertDescription>
     </Alert>
