@@ -26,7 +26,8 @@
     "db:shell": "turso db shell http://127.0.0.1:8080",
     "db:shell:preview": "turso db shell decent-nextjs-starter-template-preview",
     "db:shell:prod": "turso db shell decent-nextjs-starter-template",
-    "db:seed": "cat db/sample_data.sql | turso db shell http://127.0.0.1:8080"
+    "db:seed": "cat db/sample_data.sql | turso db shell http://127.0.0.1:8080",
+    "db:seed:create": "turso db shell http://127.0.0.1:8080 .dump | grep -E '^(INSERT INTO stack_item|PRAGMA|BEGIN|COMMIT)' > db/sample_data.sql"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.2.0",
@@ -48,6 +49,8 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "@t3-oss/env-nextjs": "^0.10.1",
     "@tabler/icons-react": "^3.5.0",
+    "@tanstack/react-query": "^5.45.0",
+    "@tanstack/react-query-devtools": "^5.45.0",
     "boolean": "^3.2.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -62,6 +65,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.51.5",
+    "react-spinners": "^0.13.8",
     "sonner": "^1.5.0",
     "sst": "^3.0.33",
     "tailwind-merge": "^2.3.0",

@@ -22,10 +22,12 @@ export const env = createEnv({
   },
   client: {
     NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: z.string().optional().default(''),
+    NEXT_PUBLIC_REACT_QUERY_DEVTOOLS: zParsedBoolean,
   },
 
   // client side variables for Next.js 14+
   experimental__runtimeEnv: {
     NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID,
+    NEXT_PUBLIC_REACT_QUERY_DEVTOOLS: process.env.NEXT_PUBLIC_REACT_QUERY_DEVTOOLS,
   },
 });

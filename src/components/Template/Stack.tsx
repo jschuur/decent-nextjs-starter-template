@@ -1,9 +1,24 @@
-import { getStackItems } from '@/db/queries';
+'use client';
 
+import ErrorCallout from '@/components/Site/ErrorCallout';
+// import Loading from '@/components/Site/Loading';
+import NoticeCallout from '@/components/Site/NoticeCallout';
 import StackItem from '@/components/Template/StackItem';
 
-export default async function Stack() {
-  const stackItems = await getStackItems();
+import useStackItems from '@/hooks/useStackItems';
+
+import { getErrorMessage } from '@/lib/utils';
+
+export default function Stack() {
+  // will initially use prefetched data that was  bundled at build time, but also
+  // immediately performs a new fetch and updates the UI with the latest data from DB
+  const { data: stackItems = [], isLoading, error } = useStackItems();
+
+  // if you're not using prefetched/dehydrated data, you might want to show a loading spinner
+  // if (isLoading) return <Loading />;
+
+  if (error)
+    return <ErrorCallout title='Error loading stack items'>{getErrorMessage(error)}</ErrorCallout>;
 
   return (
     <div className='pb-4'>
@@ -15,10 +30,15 @@ export default async function Stack() {
           ))}
         </div>
       ) : (
-        <p>
-          Stack data missing. Run <code className='font-bold'>(p)npm run db:seed</code> to seed the
-          database with stack data.
-        </p>
+        <NoticeCallout title='Stack data missing'>
+          <p>
+            Run <code className='font-bold'>(p)npm run db:seed</code> to seed the database (
+            <a href='https://github.com/jschuur/decent-nextjs-starter-template?tab=readme-ov-file#usage'>
+              more setup details
+            </a>
+            ).
+          </p>
+        </NoticeCallout>
       )}
     </div>
   );

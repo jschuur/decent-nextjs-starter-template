@@ -5,10 +5,7 @@ export default function News() {
     <Alert className='bg-orange-50'>
       <AlertTitle>Work in Progress</AlertTitle>
       <AlertDescription>
-        <p>
-          Coming soon: TanStack Query with hydration, nav menu, Sentry/Google Analytics and misc UI
-          helper hooks.
-        </p>
+        <p>Coming soon: Sentry, nav menu and misc UI helper hooks.</p>
       </AlertDescription>
     </Alert>
   );
