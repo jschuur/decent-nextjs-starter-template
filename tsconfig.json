@@ -20,7 +20,10 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@shared/*": ["./src/lib/shared/*"],
+      "@ui/*": ["./src/lib/shared/design-system/components/ui/*"],
+      "@ui/utils": ["./src/lib/shared/design-system/utils"]
     }
   },
   "include": [
