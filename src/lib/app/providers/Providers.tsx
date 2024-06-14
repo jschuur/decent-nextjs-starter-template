@@ -7,7 +7,7 @@ import { ReactNode, useState } from "react";
 
 import { TooltipProvider } from "@ui/tooltip";
 
-import { env } from "@/env";
+import { env } from "@shared/config/env";
 import { defaultTanStackQueryOptions } from "@/lib/config";
 
 type Props = {

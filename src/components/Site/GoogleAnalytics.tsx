@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { GoogleAnalytics as GoogleAnalyticsScript } from '@next/third-parties/google';
+import { GoogleAnalytics as GoogleAnalyticsScript } from "@next/third-parties/google";
 
-import { env } from '@/env';
+import { env } from "@shared/config/env";
 
 export default function GoogleAnalytics() {
   return env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID ? (

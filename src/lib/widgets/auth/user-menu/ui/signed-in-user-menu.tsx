@@ -1,7 +1,7 @@
 import { User } from "next-auth";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
-import { ReactNode } from "react";
+import { FC } from "react";
 
 import {
   DropdownMenu,
@@ -12,16 +12,15 @@ import {
   DropdownMenuTrigger,
 } from "@ui/dropdown-menu";
 
-type Props = {
-  children: ReactNode;
+export interface SignedInUserMenuProps {
   user: User;
-};
+}
 
-export default function AccountMenu({ children, user }: Props) {
+export const SignedInUserMenu: FC<SignedInUserMenuProps> = ({ user }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="border-none data-[state=open]:border-none focus:ring-0 focus:ring-transparent focus:ring-offset-0">
-        {children}
+        {user.name}
       </DropdownMenuTrigger>
       <DropdownMenuContent
         onCloseAutoFocus={(e) => e.preventDefault()}
@@ -44,4 +43,4 @@ export default function AccountMenu({ children, user }: Props) {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};

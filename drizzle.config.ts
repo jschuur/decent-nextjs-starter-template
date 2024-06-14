@@ -1,15 +1,15 @@
-import { env } from '@/env';
-import 'dotenv/config';
+import { env } from "@shared/config/env";
+import "dotenv/config";
 
-import type { Config } from 'drizzle-kit';
+import type { Config } from "drizzle-kit";
 
 const config: Config = {
-  schema: './src/db/schema.ts',
-  out: './db/migrations',
-  driver: 'turso',
-  dialect: 'sqlite',
+  schema: "./src/lib/shared/services/db/schema",
+  out: "./src/lib/shared/services/db/migrations",
+  driver: "turso",
+  dialect: "sqlite",
   dbCredentials: {
-    url: env.DATABASE_URL as string,
+    url: env.DATABASE_URL,
     authToken: env.DATABASE_AUTH_TOKEN,
   },
 };

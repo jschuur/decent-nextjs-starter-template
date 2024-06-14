@@ -26,8 +26,6 @@
     "db:shell": "turso db shell http://127.0.0.1:8080",
     "db:shell:preview": "turso db shell decent-nextjs-starter-template-preview",
     "db:shell:prod": "turso db shell decent-nextjs-starter-template",
-    "db:seed": "cat db/sample_data.sql | turso db shell http://127.0.0.1:8080",
-    "db:seed:create": "turso db shell http://127.0.0.1:8080 .dump | grep -E '^(INSERT INTO stack_item|PRAGMA|BEGIN|COMMIT)' > db/sample_data.sql",
     "ui:add": "bunx --bun shadcn-ui@latest add"
   },
   "dependencies": {

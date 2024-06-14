@@ -22,6 +22,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@shared/*": ["./src/lib/shared/*"],
+      "@widgets/*": ["./src/lib/widgets/*"],
+      "@app/*": ["./src/lib/app/*"],
       "@ui/*": ["./src/lib/shared/design-system/components/ui/*"],
       "@ui/utils": ["./src/lib/shared/design-system/utils"]
     }
