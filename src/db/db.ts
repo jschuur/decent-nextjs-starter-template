@@ -7,6 +7,9 @@ import { env } from '@/env';
 const client = createClient({
   url: env.DATABASE_URL,
   authToken: env.DATABASE_AUTH_TOKEN,
+  // use Node's default fetch, so we don't have to worry about cached queries from Next.js
+  // https://github.com/tursodatabase/libsql-client-ts/issues/38
+  fetch: global.fetch,
 });
 
 export const db = drizzle(client, {
