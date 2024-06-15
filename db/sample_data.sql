@@ -13,5 +13,6 @@ INSERT INTO stack_item VALUES('460857b3-4ab0-4ee0-84ba-aba5ed05eabd','Turso','ht
 INSERT INTO stack_item VALUES('73d4f74c-c200-4dbc-967a-2f6f6190a02b','Jotai','https://jotai.org/docs/introduction','Primitive and flexible state management for React.',11,1717846808000,'["state"]');
 INSERT INTO stack_item VALUES('aa746040-3d3a-4c21-ac14-ed53bc43580e','SST (Ion)','https://ion.sst.dev/docs/start/aws/nextjs','Build modern full-stack applications on AWS (and beyond).',13,1717930029000,'["tooling"]');
 INSERT INTO stack_item VALUES('09986d87-9f59-4a5e-8ac0-7b57068e91d5','Auth.js','https://authjs.dev/getting-started','Authentication for the Web. Free and open source.',9,1717930029000,'["authentication"]');
-INSERT INTO stack_item VALUES('4a9d83eb-743d-4042-9c79-311ae144e54a','T3 Env','https://env.t3.gg/','Framework agnostic validation for type-safe environment variables.',14,1718191280000,'["utils"]');
+INSERT INTO stack_item VALUES('4a9d83eb-743d-4042-9c79-311ae144e54a','T3 Env','https://env.t3.gg/docs/nextjs','Framework agnostic validation for type-safe environment variables.',15,1718191280000,'["utils"]');
+INSERT INTO stack_item VALUES('1677a8ec-aea0-4e89-bfd6-1eb0a902a2bb','Sentry','https://docs.sentry.io/platforms/javascript/guides/nextjs/','Developer-first error tracking and performance monitoring platform.',14,1718387916000,'["tooling"]');
 COMMIT;
