@@ -35,12 +35,12 @@ export default function Account() {
       size='sm'
       variant='default'
       onClick={login}
-      className='bg-blue-100 hover:bg-blue-200 text-black'
+      className='bg-blue-100 text-black hover:bg-blue-200'
     >
       {status === 'loading' || isLoggingIn ? (
-        <IconLoader2 className='size-4 sm:size-5 animate-spin mr-2' />
+        <IconLoader2 className='mr-2 size-4 animate-spin sm:size-5' />
       ) : (
-        <IconUser className='size-4 sm:size-5 mr-2' />
+        <IconUser className='mr-2 size-4 sm:size-5' />
       )}
       Signin
     </Button>

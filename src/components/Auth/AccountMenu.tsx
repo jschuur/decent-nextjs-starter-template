@@ -20,13 +20,13 @@ type Props = {
 export default function AccountMenu({ children, user }: Props) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className='border-none data-[state=open]:border-none focus:ring-0 focus:ring-transparent focus:ring-offset-0'>
+      <DropdownMenuTrigger className='border-none focus:ring-0 focus:ring-transparent focus:ring-offset-0 data-[state=open]:border-none'>
         {children}
       </DropdownMenuTrigger>
       <DropdownMenuContent onCloseAutoFocus={(e) => e.preventDefault()} align='end'>
         <DropdownMenuLabel className='flex flex-col'>
           <div>{user.name}</div>
-          <div className='text-[7pt] text-slate-500 font-normal'>{user.email}</div>
+          <div className='text-[7pt] font-normal text-slate-500'>{user.email}</div>
         </DropdownMenuLabel>
         <DropdownMenuItem asChild>
           <Link href='/public'>Public Page</Link>

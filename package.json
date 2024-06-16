@@ -12,6 +12,7 @@
     "build": "next build",
     "check": "tsc --noEmit",
     "lint": "next lint",
+    "format": "prettier --write .",
     "start": "next start",
     "deploy": "pnpm run deploy:preview",
     "deploy:preview": "sst deploy --stage preview",
@@ -87,7 +88,9 @@
     "drizzle-kit": "^0.22.7",
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.4",
+    "eslint-config-prettier": "^9.1.0",
     "postcss": "^8.4.38",
+    "prettier-plugin-tailwindcss": "^0.6.4",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.4.5"
   }

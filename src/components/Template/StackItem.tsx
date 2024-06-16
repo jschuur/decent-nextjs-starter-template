@@ -33,7 +33,7 @@ type Props = {
 };
 export default function StackItemEntry({ item }: Props) {
   return (
-    <Card className='grid grid-rows-[auto,1fr,auto] shadow hover:even:rotate-1 hover:odd:-rotate-1 hover:scale-105 hover:shadow-lg hover:bg-orange-50 transition ease-in-out'>
+    <Card className='grid grid-rows-[auto,1fr,auto] shadow transition ease-in-out hover:scale-105 hover:bg-orange-50 hover:shadow-lg hover:odd:-rotate-1 hover:even:rotate-1'>
       <CardHeader className='grid grid-cols-subgrid grid-rows-subgrid'>
         <CardTitle>
           {item.name}
@@ -43,7 +43,7 @@ export default function StackItemEntry({ item }: Props) {
                 key={tag}
                 className={cn(
                   badgeColors[tag as keyof typeof badgeColors] || 'bg-red-300',
-                  'text-gray-800 font-medium tracking-wider uppercase text-xs pointer-events-none'
+                  'pointer-events-none text-xs font-medium uppercase tracking-wider text-gray-800'
                 )}
               >
                 {tag}

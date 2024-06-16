@@ -24,7 +24,7 @@ export default function Stack() {
     <div className='pb-4'>
       <h2>Stack</h2>
       {stackItems.length > 0 ? (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-fr pt-2'>
+        <div className='grid auto-rows-fr grid-cols-1 gap-4 pt-2 md:grid-cols-2 lg:grid-cols-3'>
           {stackItems.map((item) => (
             <StackItem key={item.id} item={item} />
           ))}

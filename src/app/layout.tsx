@@ -35,14 +35,14 @@ export default function RootLayout({
       <head />
       <body
         className={cn(
-          'min-h-screen bg-blue-50 font-sans antialiased flex flex-col',
+          'flex min-h-screen flex-col bg-blue-50 font-sans antialiased',
           fontSans.variable
         )}
       >
         <Providers>
           <ReactQueryProvider>
             <Header />
-            <main className='container max-w-5xl py-4 px-4 sm:px-8 grow'>{children}</main>
+            <main className='container max-w-5xl grow px-4 py-4 sm:px-8'>{children}</main>
             <Footer />
 
             <Toaster richColors position='bottom-center' />
