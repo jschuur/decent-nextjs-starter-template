@@ -1,3 +1,5 @@
+"use client";
+
 import { User } from "next-auth";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
@@ -33,7 +35,7 @@ export const SignedInUserMenu: FC<SignedInUserMenuProps> = ({ user }) => {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuItem asChild>
-          <Link href="/public">Public Page</Link>
+          <Link href="/">Home Page</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href="/private">Private Page</Link>

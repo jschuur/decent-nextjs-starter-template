@@ -1,1 +1,0 @@
-ALTER TABLE `stack_item` ADD `tags` text DEFAULT '[]' NOT NULL;

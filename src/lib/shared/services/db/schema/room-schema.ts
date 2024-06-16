@@ -1,4 +1,4 @@
-import { relations, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 import { users } from "./auth-schema";
@@ -21,7 +21,7 @@ export const rooms = sqliteTable("room", {
 });
 
 export const insertRoomSchema = createInsertSchema(rooms);
-export type InsertRoom = Readonly<z.infer<typeof insertRoomSchema>>;
+export type InsertRoomModel = Readonly<z.infer<typeof insertRoomSchema>>;
 
-export const selectRoomSchema = createSelectSchema(rooms);
-export type SelectRoom = Readonly<z.infer<typeof selectRoomSchema>>;
+export const roomSchema = createSelectSchema(rooms);
+export type RoomRoom = Readonly<z.infer<typeof roomSchema>>;
