@@ -6,7 +6,7 @@ import { Sheet, SheetTrigger, SheetContent } from "@ui/sheet";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@ui/tooltip";
 import Link from "next/link";
 import { Package2, Settings, PanelLeft } from "lucide-react";
-import { appNav } from "../lib/app-nav";
+import { appRoutes } from "@shared/config/routes";
 
 export interface LayoutAppProps {
   children: ReactNode;
@@ -18,13 +18,15 @@ export const metadata: Metadata = {
     "Quickly start a new Next.js project with common tools and configurations.",
 };
 
+const nav = appRoutes.map((route) => route({}));
+
 export const LayoutApp: FC<LayoutAppProps> = ({ children }) => {
   return (
     <>
       <div className="flex min-h-screen w-full flex-col bg-muted/40">
         <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
           <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
-            {appNav.map((item) => (
+            {nav.map((item) => (
               <Tooltip key={item.label}>
                 <TooltipTrigger asChild>
                   <Link
@@ -72,7 +74,7 @@ export const LayoutApp: FC<LayoutAppProps> = ({ children }) => {
                     <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
                     <span className="sr-only">Acme Inc</span>
                   </Link>
-                  {appNav.map((item) => (
+                  {nav.map((item) => (
                     <Link
                       key={item.label}
                       href={item.url}

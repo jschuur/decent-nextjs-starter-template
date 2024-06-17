@@ -3,6 +3,9 @@ import Link from "next/link";
 
 import { UserMenu } from "@widgets/auth/user-menu";
 import { FC } from "react";
+import { publicRoutes } from "@shared/config/routes";
+
+const navMenu = publicRoutes.map((route) => route({}));
 
 export const Masthead: FC = () => {
   return (
@@ -12,6 +15,17 @@ export const Masthead: FC = () => {
           <h1 className="font-medium pb-0">Decent Next.js Starter Template</h1>
         </Link>
       </div>
+      <nav>
+        {navMenu.map((item) => (
+          <Link
+            key={item.label}
+            href={item.url}
+            className="text-gray-600 hover:text-gray-800"
+          >
+            {item.label}
+          </Link>
+        ))}
+      </nav>
       <a
         href="https://github.com/jschuur/decent-nextjs-starter-template"
         rel="noreferrer noopener"
