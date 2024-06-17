@@ -17,7 +17,6 @@ export const LayoutPublic: FC<LayoutPublicProps> = ({ children }) => {
   return (
     <main className="container max-w-5xl py-4 px-4 sm:px-8 grow">
       <Masthead />
-      <h1>Public Layout</h1>
       {children}
     </main>
   );
