@@ -1,7 +1,6 @@
 import { IconBrandGithub } from "@tabler/icons-react";
-import Link from "next/link";
-
 import { UserMenu } from "@widgets/auth/user-menu";
+import Link from "next/link";
 
 export default function Header() {
   return (

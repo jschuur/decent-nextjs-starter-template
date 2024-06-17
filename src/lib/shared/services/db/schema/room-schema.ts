@@ -1,9 +1,9 @@
 import { sql } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-
-import { users } from "./auth-schema";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
+
+import { users } from "./auth-schema";
 
 export const rooms = sqliteTable("room", {
   id: text("id")

@@ -1,9 +1,8 @@
-import { IconBrandGithub } from "@tabler/icons-react";
-import Link from "next/link";
-
-import { UserMenu } from "@widgets/auth/user-menu";
-import { FC } from "react";
 import { publicRoutes } from "@shared/config/routes";
+import { IconBrandGithub } from "@tabler/icons-react";
+import { UserMenu } from "@widgets/auth/user-menu";
+import Link from "next/link";
+import { FC } from "react";
 
 const navMenu = publicRoutes.map((route) => route({}));
 

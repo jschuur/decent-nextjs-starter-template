@@ -1,4 +1,4 @@
-import { DoorOpen, Home, Dice5, Gift } from "lucide-react";
+import { Dice5, DoorOpen, Gift, Home } from "lucide-react";
 import { ComponentType } from "react";
 
 export type Route<T = null> = (params: T) => {

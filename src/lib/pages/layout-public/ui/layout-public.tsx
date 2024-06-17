@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import { FC, ReactNode } from "react";
 
-import { ReactNode, FC } from "react";
 import { Masthead } from "./masthead";
 
 export interface LayoutPublicProps {

@@ -1,7 +1,6 @@
 import { IconUser } from "@tabler/icons-react";
+import { Avatar as AvatarRoot,AvatarFallback, AvatarImage } from "@ui/avatar";
 import { User } from "next-auth";
-
-import { AvatarFallback, AvatarImage, Avatar as AvatarRoot } from "@ui/avatar";
 
 import { cn } from "@/lib/utils";
 

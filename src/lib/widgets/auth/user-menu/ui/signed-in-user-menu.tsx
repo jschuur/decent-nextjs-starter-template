@@ -1,10 +1,7 @@
 "use client";
 
-import { User } from "next-auth";
-import { signOut } from "next-auth/react";
-import Link from "next/link";
-import { FC } from "react";
-
+import { HomePage, PrivatePage } from "@shared/config/routes";
+import { signOut,User } from "@shared/services/auth/client";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,7 +10,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@ui/dropdown-menu";
-import { HomePage, PrivatePage } from "@shared/config/routes";
+import Link from "next/link";
+import { FC } from "react";
 
 export interface SignedInUserMenuProps {
   user: User;

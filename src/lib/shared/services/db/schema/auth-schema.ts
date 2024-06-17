@@ -1,5 +1,4 @@
 import type { AdapterAccountType } from "@auth/core/adapters";
-import { z } from "zod";
 import {
   integer,
   primaryKey,
@@ -7,6 +6,7 @@ import {
   text,
 } from "drizzle-orm/sqlite-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { z } from "zod";
 
 export const users = sqliteTable("user", {
   id: text("id")

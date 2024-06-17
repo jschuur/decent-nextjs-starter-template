@@ -1,4 +1,4 @@
-import { PrivatePage, metadata } from "@pages/private-page";
+import { metadata,PrivatePage } from "@pages/private-page";
 
 export { metadata };
 

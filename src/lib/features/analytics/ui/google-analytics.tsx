@@ -1,7 +1,6 @@
 "use client";
 
 import { GoogleAnalytics as GoogleAnalyticsScript } from "@next/third-parties/google";
-
 import { env } from "@shared/config/env";
 import { FC } from "react";
 

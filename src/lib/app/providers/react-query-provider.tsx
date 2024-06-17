@@ -1,8 +1,8 @@
 import {
-  HydrationBoundary,
-  QueryClient,
   defaultShouldDehydrateQuery,
   dehydrate,
+  HydrationBoundary,
+  QueryClient,
 } from "@tanstack/react-query";
 import { ReactNode } from "react";
 

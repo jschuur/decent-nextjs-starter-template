@@ -1,10 +1,9 @@
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import { env } from "@shared/config/env";
+import { db } from "@shared/services/db";
+import { redirect } from "next/navigation";
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
-
-import { db } from "@shared/services/db";
-import { env } from "@shared/config/env";
-import { redirect } from "next/navigation";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [Google],

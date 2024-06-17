@@ -1,10 +1,9 @@
-import { ReactNode, useState } from "react";
-
 import {
-  TooltipContent,
   Tooltip as TooltipRoot,
+  TooltipContent,
   TooltipTrigger,
 } from "@ui/tooltip";
+import { ReactNode, useState } from "react";
 
 type Props = {
   tooltip: string | (() => string) | undefined | null;

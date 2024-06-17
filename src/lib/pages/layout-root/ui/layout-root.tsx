@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
-
 import "@shared/design-system/globals.css";
+
 import { cn } from "@ui/utils";
-import { ReactNode, FC } from "react";
+import type { Metadata } from "next";
+import { FC,ReactNode } from "react";
+
 import { fonts } from "../lib/fonts";
 import { Providers } from "./providers";
 

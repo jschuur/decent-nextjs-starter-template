@@ -1,13 +1,12 @@
-import type { Metadata } from "next";
-
-import { ReactNode, FC } from "react";
-import { Button } from "@ui/button";
-import { Sheet, SheetTrigger, SheetContent } from "@ui/sheet";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@ui/tooltip";
-import Link from "next/link";
-import { Package2, Settings, PanelLeft } from "lucide-react";
 import { appRoutes } from "@shared/config/routes";
+import { Button } from "@ui/button";
+import { Sheet, SheetContent,SheetTrigger } from "@ui/sheet";
+import { Tooltip, TooltipContent,TooltipTrigger } from "@ui/tooltip";
 import { UserMenu } from "@widgets/auth/user-menu";
+import { Package2, PanelLeft,Settings } from "lucide-react";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { FC,ReactNode } from "react";
 
 export interface LayoutAppProps {
   children: ReactNode;

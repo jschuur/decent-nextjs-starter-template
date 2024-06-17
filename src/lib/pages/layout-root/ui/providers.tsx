@@ -1,13 +1,12 @@
 "use client";
 
+import { env } from "@shared/config/env";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { SessionProvider } from "next-auth/react";
-import { ReactNode, useState, FC } from "react";
-
 import { TooltipProvider } from "@ui/tooltip";
+import { SessionProvider } from "next-auth/react";
+import { FC,ReactNode, useState } from "react";
 
-import { env } from "@shared/config/env";
 import { defaultTanStackQueryOptions } from "@/lib/config";
 
 export interface ProvidersProps {
