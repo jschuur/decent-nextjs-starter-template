@@ -19,6 +19,9 @@ export default $config({
       environment: {
         SST_STAGE: $app.stage,
         ...environment,
+        // these are picked up via their SENTRY_* versions, so we don't need to explicitly list them
+        NEXT_PUBLIC_SENTRY_DSN: process.env.SENTRY_DSN || '',
+        NEXT_PUBLIC_SENTRY_DEBUG: process.env.SENTRY_DEBUG || '',
       },
     };
 

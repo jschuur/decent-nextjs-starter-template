@@ -42,8 +42,9 @@ Substitute `pnpm` for your package manager of choice (npm, bun, yarn etc).
   - Extensions: [Drizzle ORM snippets (VS Code)](https://marketplace.visualstudio.com/items?itemName=imgildev.vscode-drizzle-snippets) by [Manuel Gil](https://github.com/ManuelGil), [Drizzle Studio Chrome](https://chromewebstore.google.com/detail/drizzle-studio/mjkojjodijpaneehkgmeckeljgkimnmd?hl=en).
 - [SST (Ion)](https://ion.sst.dev/): Deployment framework for AWS/Cloudflare with OpenNext support ([docs](https://ion.sst.dev/docs/start/aws/nextjs)).
 - [T3 Env](https://env.t3.gg/): Type-safe environment variables ([docs](https://env.t3.gg/docs/introduction)).
-- [Auth.js](https://authjs.dev/) Authentication library ([docs](https://authjs.dev/getting-started/installation?framework=next.js)).
+- [Auth.js](https://authjs.dev/): Authentication library ([docs](https://authjs.dev/getting-started/installation?framework=next.js)).
   - via [Drizzle adapter](https://authjs.dev/getting-started/adapters/drizzle)
 - [Google Analytics](https://analytics.google.com/): Via @next/third-parties ([docs](https://nextjs.org/docs/messages/next-script-for-ga)).
-- [TanStack Query]() Data fetching library ([docs](https://tanstack.com/query/latest/docs/framework/react/overview)).
+- [TanStack Query](https://tanstack.com/query/): Data fetching library ([docs](https://tanstack.com/query/latest/docs/framework/react/overview)).
   - configured for build time [pre-fetching and rehydrating](https://tanstack.com/query/latest/docs/framework/react/guides/advanced-ssr#prefetching-and-dehydrating-data)
+- [Sentry](https://sentry.io/): Error tracking and performance monitoring ([docs](https://docs.sentry.io/platforms/javascript/guides/nextjs/))

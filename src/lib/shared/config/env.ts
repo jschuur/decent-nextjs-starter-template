@@ -19,15 +19,23 @@ export const env = createEnv({
     AUTH_GOOGLE_ID: z.string(),
     AUTH_GOOGLE_SECRET: z.string(),
     AUTH_DEBUG: zParsedBoolean,
+    SENTRY_DSN: z.string().optional(),
+    SENTRY_DEBUG: zParsedBoolean,
   },
   client: {
     NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: z.string().optional().default(''),
     NEXT_PUBLIC_REACT_QUERY_DEVTOOLS: zParsedBoolean,
+    // sst.config.ts will set these based on SENTRY_* variables, so no need to
+    // duplicate them in the .env files
+    NEXT_PUBLIC_SENTRY_DSN: z.string().optional(),
+    NEXT_PUBLIC_SENTRY_DEBUG: zParsedBoolean,
   },
 
   // client side variables for Next.js 14+
   experimental__runtimeEnv: {
     NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID,
     NEXT_PUBLIC_REACT_QUERY_DEVTOOLS: process.env.NEXT_PUBLIC_REACT_QUERY_DEVTOOLS,
+    NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN,
+    NEXT_PUBLIC_SENTRY_DEBUG: process.env.NEXT_PUBLIC_SENTRY_DEBUG,
   },
 });

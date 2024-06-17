@@ -4,10 +4,10 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <div className="flex flex-row items-center justify-between w-full bg-white shadow py-2 px-2 sm:px-5 gap-2">
-      <div className="grow">
-        <Link href="/">
-          <h1 className="font-medium pb-0">Decent Next.js Starter Template</h1>
+    <div className='flex w-full flex-row items-center justify-between gap-2 bg-white px-2 py-2 shadow sm:px-5'>
+      <div className='grow'>
+        <Link href='/'>
+          <h1 className='pb-0 font-medium'>Decent Next.js Starter Template</h1>
         </Link>
       </div>
       <a
@@ -18,7 +18,7 @@ export default function Header() {
         className="no-underline hover:no-underline"
       >
         <IconBrandGithub
-          className="text-purple-600 hover:text-purple-700 size-6 sm:size-8"
+          className='size-6 text-purple-600 hover:text-purple-700 sm:size-8'
           strokeWidth={1.5}
         />
       </a>
