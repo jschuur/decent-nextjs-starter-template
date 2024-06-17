@@ -7,6 +7,7 @@ import { Tooltip, TooltipTrigger, TooltipContent } from "@ui/tooltip";
 import Link from "next/link";
 import { Package2, Settings, PanelLeft } from "lucide-react";
 import { appRoutes } from "@shared/config/routes";
+import { UserMenu } from "@widgets/auth/user-menu";
 
 export interface LayoutAppProps {
   children: ReactNode;
@@ -89,6 +90,9 @@ export const LayoutApp: FC<LayoutAppProps> = ({ children }) => {
             </Sheet>
           </header>
           <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
+            <header className="flex justify-end">
+              <UserMenu />
+            </header>
             {children}
           </main>
         </div>

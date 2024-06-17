@@ -13,12 +13,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@ui/dropdown-menu";
+import { HomePage, PrivatePage } from "@shared/config/routes";
 
 export interface SignedInUserMenuProps {
   user: User;
 }
 
 export const SignedInUserMenu: FC<SignedInUserMenuProps> = ({ user }) => {
+  const home = HomePage(null);
+  const dash = PrivatePage(null);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="border-none data-[state=open]:border-none focus:ring-0 focus:ring-transparent focus:ring-offset-0">
@@ -35,10 +39,10 @@ export const SignedInUserMenu: FC<SignedInUserMenuProps> = ({ user }) => {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuItem asChild>
-          <Link href="/">Home Page</Link>
+          <Link href={home.url}>{home.label}</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/private">Private Page</Link>
+          <Link href={dash.url}>{dash.label}</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => signOut()}>Logout</DropdownMenuItem>
