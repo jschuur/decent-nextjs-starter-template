@@ -1,10 +1,19 @@
 'use client';
 
+import { IconPlus } from '@tabler/icons-react';
+import { sortBy } from 'lodash';
+import { useSession } from 'next-auth/react';
+import { useHotkeys } from 'react-hotkeys-hook';
+
 import ErrorCallout from '@/components/Site/ErrorCallout';
 // import Loading from '@/components/Site/Loading';
 import NoticeCallout from '@/components/Site/NoticeCallout';
 import StackItem from '@/components/Template/StackItem';
+import StackItemDialog from '@/components/Template/StackItemDialog';
 
+import { Button } from '@/components/ui/button';
+
+import useDialog from '@/hooks/useDialog';
 import useStackItems from '@/hooks/useStackItems';
 
 import { getErrorMessage } from '@/lib/utils';
@@ -12,7 +21,12 @@ import { getErrorMessage } from '@/lib/utils';
 export default function Stack() {
   // will initially use prefetched data that was  bundled at build time, but also
   // immediately performs a new fetch and updates the UI with the latest data from DB
-  const { data: stackItems = [], isLoading, error } = useStackItems();
+  const { status } = useSession();
+  const loggedIn = status === 'authenticated';
+  const { data: stackItems = [], error } = useStackItems();
+  const { open: addStackItem } = useDialog('stackItem');
+
+  useHotkeys('a', () => addStackItem(), { preventDefault: true });
 
   // if you're not using prefetched/dehydrated data, you might want to show a loading spinner
   // if (isLoading) return <Loading />;
@@ -20,12 +34,22 @@ export default function Stack() {
   if (error)
     return <ErrorCallout title='Error loading stack items'>{getErrorMessage(error)}</ErrorCallout>;
 
+  const sortedStackItems = sortBy(stackItems, 'position');
+
   return (
     <div className='pb-4'>
-      <h2>Stack</h2>
-      {stackItems.length > 0 ? (
+      <div className='flex items-center justify-between pb-2'>
+        <h2 className='pb-0'>Stack</h2>
+        {loggedIn && (
+          <Button variant='outline' onClick={() => addStackItem()}>
+            <IconPlus className='mr-2 size-4' />
+            Add Stack Item
+          </Button>
+        )}
+      </div>
+      {sortedStackItems.length > 0 ? (
         <div className='grid auto-rows-fr grid-cols-1 gap-4 pt-2 md:grid-cols-2 lg:grid-cols-3'>
-          {stackItems.map((item) => (
+          {sortedStackItems.map((item) => (
             <StackItem key={item.id} item={item} />
           ))}
         </div>
@@ -40,6 +64,7 @@ export default function Stack() {
           </p>
         </NoticeCallout>
       )}
+      <StackItemDialog />
     </div>
   );
 }

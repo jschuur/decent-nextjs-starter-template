@@ -47,4 +47,14 @@ Substitute `pnpm` for your package manager of choice (npm, bun, yarn etc).
 - [Google Analytics](https://analytics.google.com/): Via @next/third-parties ([docs](https://nextjs.org/docs/messages/next-script-for-ga)).
 - [TanStack Query](https://tanstack.com/query/): Data fetching library ([docs](https://tanstack.com/query/latest/docs/framework/react/overview)).
   - configured for build time [pre-fetching and rehydrating](https://tanstack.com/query/latest/docs/framework/react/guides/advanced-ssr#prefetching-and-dehydrating-data)
-- [Sentry](https://sentry.io/): Error tracking and performance monitoring ([docs](https://docs.sentry.io/platforms/javascript/guides/nextjs/))
+  - sample implementation of optimistic updates
+- [Sentry](https://sentry.io/): Error tracking and performance monitoring ([docs](https://docs.sentry.io/platforms/javascript/guides/nextjs/)).
+- [React Hotkeys Hook](https://react-hotkeys-hook.vercel.app/): Hotkeys ([docs](https://react-hotkeys-hook.vercel.app/docs/intro)).
+
+## Hooks
+
+- [`useDialog`](./src/hooks/useDialog.ts): Open/close dialog management with type-safe dialog data reference via Zustand.
+
+## Components
+
+- [`ConfirmationDialog`](./src/components/ConfirmationDialog.tsx): Reusable confirmation alert with callbacks.

@@ -5,7 +5,7 @@ export default function News() {
     <Alert className='bg-orange-50'>
       <AlertTitle>Work in Progress</AlertTitle>
       <AlertDescription>
-        <p>Coming soon: Nav menu and sample UI implementations with helpers.</p>
+        <p>Coming soon: Nav menu and more sample UI implementations with helpers.</p>
       </AlertDescription>
     </Alert>
   );

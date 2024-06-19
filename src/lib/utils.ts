@@ -14,3 +14,7 @@ export function getErrorMessage(error: unknown) {
 
   return String(error);
 }
+
+export function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

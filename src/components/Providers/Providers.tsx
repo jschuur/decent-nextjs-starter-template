@@ -2,13 +2,15 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { useSetAtom } from 'jotai';
 import { SessionProvider } from 'next-auth/react';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 import { TooltipProvider } from '@/components/ui/tooltip';
 
 import { env } from '@/env';
 import { defaultTanStackQueryOptions } from '@/lib/config';
+import { queryClientAtom } from '@/stores/jotai';
 
 type Props = {
   children: ReactNode;
@@ -21,6 +23,11 @@ export default function Providers({ children }: Props) {
   const [queryClient] = useState(
     () => new QueryClient({ defaultOptions: defaultTanStackQueryOptions })
   );
+  const setQueryClient = useSetAtom(queryClientAtom);
+
+  useEffect(() => {
+    if (queryClient) setQueryClient(queryClient);
+  }, [queryClient, setQueryClient]);
 
   return (
     <QueryClientProvider client={queryClient}>
