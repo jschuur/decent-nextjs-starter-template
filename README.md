@@ -58,3 +58,7 @@ Substitute `pnpm` for your package manager of choice (npm, bun, yarn etc).
 ## Components
 
 - [`ConfirmationDialog`](./src/components/ConfirmationDialog.tsx): Reusable confirmation alert with callbacks.
+
+## Helpers
+
+- [`role.ts`](./src/helpers/role.ts): Basic role-based access controls.

@@ -3,6 +3,8 @@ import { integer, primaryKey, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 import type { AdapterAccountType } from 'next-auth/adapters';
 import { v4 as uuidv4 } from 'uuid';
 
+import type { UserRole } from '@/lib/types';
+
 export const stackItems = sqliteTable('stack_item', {
   id: text('id')
     .primaryKey()
@@ -29,6 +31,10 @@ export const users = sqliteTable('user', {
   email: text('email').notNull(),
   emailVerified: integer('emailVerified', { mode: 'timestamp_ms' }),
   image: text('image'),
+  roles: text('roles', { mode: 'json' })
+    .notNull()
+    .$type<UserRole[]>()
+    .default(sql`'[]'`),
 });
 
 export const accounts = sqliteTable(

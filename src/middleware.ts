@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import { auth } from '@/auth';
+import { auth } from '@/auth/auth';
 
 export const middleware = auth(function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/monitoring')) {

@@ -16,17 +16,19 @@ import { Button } from '@/components/ui/button';
 import useDialog from '@/hooks/useDialog';
 import useStackItems from '@/hooks/useStackItems';
 
+import { canEditStackItems } from '@/auth/roles';
 import { getErrorMessage } from '@/lib/utils';
 
 export default function Stack() {
+  const { data: session } = useSession();
+  const stackAdmin = canEditStackItems(session?.user);
+
   // will initially use prefetched data that was  bundled at build time, but also
   // immediately performs a new fetch and updates the UI with the latest data from DB
-  const { status } = useSession();
-  const loggedIn = status === 'authenticated';
   const { data: stackItems = [], error } = useStackItems();
   const { open: addStackItem } = useDialog('stackItem');
 
-  useHotkeys('a', () => addStackItem(), { preventDefault: true });
+  useHotkeys('a', () => addStackItem(), { enabled: stackAdmin, preventDefault: true });
 
   // if you're not using prefetched/dehydrated data, you might want to show a loading spinner
   // if (isLoading) return <Loading />;
@@ -40,7 +42,7 @@ export default function Stack() {
     <div className='pb-4'>
       <div className='flex items-center justify-between pb-2'>
         <h2 className='pb-0'>Stack</h2>
-        {loggedIn && (
+        {stackAdmin && (
           <Button variant='outline' onClick={() => addStackItem()}>
             <IconPlus className='mr-2 size-4' />
             Add Stack Item

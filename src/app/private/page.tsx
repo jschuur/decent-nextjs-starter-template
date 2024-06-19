@@ -1,4 +1,4 @@
-import { auth } from '@/auth';
+import { auth } from '@/auth/auth';
 import { redirect } from 'next/navigation';
 
 export default async function PrivatePage() {

@@ -56,6 +56,7 @@ export default function StackItemDialog() {
     },
   });
 
+  // TODO: Check permissions again in server action https://stackoverflow.com/a/78256091/122864
   function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       const updatedValues = mapValues(

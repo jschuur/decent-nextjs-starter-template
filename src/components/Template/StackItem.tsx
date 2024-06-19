@@ -3,6 +3,7 @@
 import { IconEdit, IconTrash } from '@tabler/icons-react';
 import { FileTextIcon } from 'lucide-react';
 import { useSession } from 'next-auth/react';
+import { useState } from 'react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -20,10 +21,10 @@ import ConfirmationDialog from '@/components/ConfirmationDialog';
 import useDialog from '@/hooks/useDialog';
 import useStackItems from '@/hooks/useStackItems';
 
+import { canEditStackItems } from '@/auth/roles';
 import { cn } from '@/lib/utils';
 
 import { StackItem } from '@/lib/types';
-import { useState } from 'react';
 
 const badgeColors = {
   css: 'bg-pink-300',
@@ -41,8 +42,8 @@ type Props = {
   item: StackItem;
 };
 export default function StackItemEntry({ item }: Props) {
-  const { status } = useSession();
-  const loggedIn = status === 'authenticated';
+  const { data: session } = useSession();
+  const stackAdmin = canEditStackItems(session?.user);
 
   const { open } = useDialog<StackItem>('stackItem');
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -53,14 +54,14 @@ export default function StackItemEntry({ item }: Props) {
       <Card
         className={cn(
           'group grid grid-rows-[auto,1fr,auto] shadow transition ease-in-out hover:bg-orange-50 hover:shadow-lg',
-          !loggedIn && 'hover:scale-105 hover:odd:-rotate-1 hover:even:rotate-1'
+          !stackAdmin && 'hover:scale-105 hover:odd:-rotate-1 hover:even:rotate-1'
         )}
       >
         <CardHeader className='grid grid-cols-subgrid grid-rows-subgrid'>
           <CardTitle>
             <div className='flex flex-row items-center justify-between gap-2'>
               <div className='grow'>{item.name}</div>
-              {loggedIn && (
+              {stackAdmin && (
                 <div className='hidden text-base text-slate-400 group-hover:block'>
                   #<span className='ml-0.5'>{item.position}</span>
                 </div>
@@ -102,7 +103,7 @@ export default function StackItemEntry({ item }: Props) {
                 </Button>
               </a>
             )}
-            {loggedIn && (
+            {stackAdmin && (
               <>
                 <IconEdit
                   onClick={() => open(item)}
