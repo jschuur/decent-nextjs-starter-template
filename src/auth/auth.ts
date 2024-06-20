@@ -42,3 +42,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
   },
 });
+
+type AsyncProtectedCallback<A extends unknown[], R> = (...args: A) => Promise<R>;
+
+// wrapper to protection server actions that should only be run by admins
+export function adminProtectedAction<A extends unknown[], R>(
+  callback: AsyncProtectedCallback<A, R>
+): AsyncProtectedCallback<A, R> {
+  return async (...args: A) => {
+    const session = await auth();
+
+    if (session?.user.roles.includes('Admin')) return callback(...args);
+
+    throw new Error('Unauthorized');
+  };
+}

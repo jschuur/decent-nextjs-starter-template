@@ -8,7 +8,7 @@ By [Joost Schuur](https://joostschuur.com) ([Twitter](https://twitter.com/joosts
 
 ## Usage
 
-Not much here yet, but if you're taking an early look, start by cloning the repository:
+Still a work in progress, but if you're taking an early look, start by cloning the repository:
 
 ```
 git clone https://github.com/jschuur/decent-nextjs-starter-template
@@ -61,4 +61,5 @@ Substitute `pnpm` for your package manager of choice (npm, bun, yarn etc).
 
 ## Helpers
 
-- [`role.ts`](./src/helpers/role.ts): Basic role-based access controls.
+- [`roles.ts`](./src/auth/roles.ts): Basic role-based access controls.
+- [`adminProtectedAction`](./src/auth/auth.ts): Wrapper to limit server actions to admin users.

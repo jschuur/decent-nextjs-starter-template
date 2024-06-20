@@ -2,6 +2,7 @@
 
 import { asc, eq } from 'drizzle-orm';
 
+import { adminProtectedAction } from '@/auth/auth';
 import { db } from '@/db/db';
 import { stackItems } from '@/db/schema';
 
@@ -15,14 +16,14 @@ type UpdateStackItemParams = {
   id: string;
   data: Partial<StackItem>;
 };
-export async function updateStackItem({ id, data }: UpdateStackItemParams) {
-  return db.update(stackItems).set(data).where(eq(stackItems.id, id)).returning();
-}
+export const updateStackItem = adminProtectedAction(({ id, data }: UpdateStackItemParams) =>
+  db.update(stackItems).set(data).where(eq(stackItems.id, id)).returning()
+);
 
-export async function createStackItem(data: StackItemInsert) {
-  return db.insert(stackItems).values(data).returning();
-}
+export const createStackItem = adminProtectedAction((data: StackItemInsert) =>
+  db.insert(stackItems).values(data).returning()
+);
 
-export async function deleteStackItem({ id }: StackItem) {
-  return db.delete(stackItems).where(eq(stackItems.id, id)).returning();
-}
+export const deleteStackItem = adminProtectedAction(({ id }: StackItem) =>
+  db.delete(stackItems).where(eq(stackItems.id, id)).returning()
+);
