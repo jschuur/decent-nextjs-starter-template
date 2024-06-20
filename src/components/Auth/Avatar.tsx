@@ -20,9 +20,7 @@ export default function Avatar({ user, className }: Props) {
     : '';
 
   return (
-    <AvatarRoot
-      className={cn('border-white-500 size-8 border-[2px] border-blue-100 sm:size-10', className)}
-    >
+    <AvatarRoot className={cn('size-8', className)}>
       <AvatarImage
         className={cn('pointer-events-none select-none')}
         src={user.image || undefined}

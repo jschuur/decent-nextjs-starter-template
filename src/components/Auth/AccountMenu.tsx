@@ -1,8 +1,8 @@
 import { User } from 'next-auth';
-import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,18 +12,21 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
+import SignOut from '@/components/Auth/SignOut';
+
 type Props = {
   children: ReactNode;
   user: User;
 };
-
 export default function AccountMenu({ children, user }: Props) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className='border-none focus:ring-0 focus:ring-transparent focus:ring-offset-0 data-[state=open]:border-none'>
-        {children}
+      <DropdownMenuTrigger asChild>
+        <Button variant='ghost' className='relative h-10 w-10 rounded-full'>
+          {children}
+        </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent onCloseAutoFocus={(e) => e.preventDefault()} align='end'>
+      <DropdownMenuContent align='end' sideOffset={8} alignOffset={-4}>
         <DropdownMenuLabel className='flex flex-col'>
           <div>{user.name}</div>
           <div className='text-[7pt] font-normal text-slate-500'>{user.email}</div>
@@ -35,7 +38,9 @@ export default function AccountMenu({ children, user }: Props) {
           <Link href='/private'>Private Page</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => signOut()}>Logout</DropdownMenuItem>
+        <DropdownMenuItem>
+          <SignOut />
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
