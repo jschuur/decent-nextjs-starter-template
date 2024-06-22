@@ -35,7 +35,7 @@ export default function AccountMenu({ children, user }: Props) {
           <Link href='/public'>Public Page</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href='/private'>Private Page</Link>
+          <Link href='/admin'>Admin Dashboard</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>

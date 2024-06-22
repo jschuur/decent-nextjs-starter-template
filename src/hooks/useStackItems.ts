@@ -6,6 +6,7 @@ import { createStackItem, deleteStackItem, getStackItems, updateStackItem } from
 import { queryClientAtom } from '@/stores/jotai';
 
 import { StackItem } from '@/lib/types';
+import { v4 as uuidv4 } from 'uuid';
 
 // Basic custom hook to later abstract away custom logic
 export default function useStackItems() {
@@ -68,9 +69,16 @@ export default function useStackItems() {
         await queryClient.cancelQueries({ queryKey: ['stackItems'] });
         const previousStackItems = queryClient.getQueryData<StackItem[]>(['stackItems']);
 
+        // temporary data that will be replaced by the server response with defaults
+        const optimisticStackItem = { ...stackItem };
+        optimisticStackItem.id = uuidv4();
+        optimisticStackItem.createdAt = new Date();
+        // TODO: create default position here
+        // optimisticStackItem.position =
+
         // Optimistically update to the new value
         queryClient.setQueryData<StackItem[]>(['stackItems'], (old) =>
-          old ? [...old, stackItem as StackItem] : [stackItem as StackItem]
+          old ? [...old, optimisticStackItem as StackItem] : [optimisticStackItem as StackItem]
         );
 
         return { previousStackItems, stackItem };

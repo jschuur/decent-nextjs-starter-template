@@ -1,10 +1,10 @@
 'use server';
 
-import { asc, eq } from 'drizzle-orm';
+import { asc, count, eq } from 'drizzle-orm';
 
 import { adminProtectedAction } from '@/auth/auth';
 import { db } from '@/db/db';
-import { stackItems } from '@/db/schema';
+import { stackItems, users } from '@/db/schema';
 
 import { StackItem, StackItemInsert } from '@/lib/types';
 
@@ -27,3 +27,9 @@ export const createStackItem = adminProtectedAction((data: StackItemInsert) =>
 export const deleteStackItem = adminProtectedAction(({ id }: StackItem) =>
   db.delete(stackItems).where(eq(stackItems.id, id)).returning()
 );
+
+export const userCount = async () => {
+  const res = await db.select({ count: count() }).from(users);
+
+  return res[0].count;
+};

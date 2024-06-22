@@ -12,7 +12,7 @@ export const hasRole = (user: PotentialUser, role: UserRole) =>
   user?.roles?.includes(role) || false;
 
 // Internal role helpers
-const isAdmin = (user: PotentialUser) => hasRole(user, 'Admin');
+export const isAdmin = (user: PotentialUser) => hasRole(user, 'Admin');
 
 // Feature specific permission helpers
 export const canEditStackItems = (user: PotentialUser) => isAdmin(user);

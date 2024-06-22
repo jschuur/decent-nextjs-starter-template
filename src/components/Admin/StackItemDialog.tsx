@@ -4,7 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { mapValues, maxBy, pickBy } from 'lodash';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { v4 as uuidv4 } from 'uuid';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
@@ -66,7 +65,7 @@ export default function StackItemDialog() {
 
       if (Object.keys(updatedValues).length > 0) {
         if (stackItem) updateExistingStackItem({ id: stackItem.id, data: updatedValues });
-        else createNewStackItem({ id: uuidv4(), ...values });
+        else createNewStackItem(values);
       } else toast.info('No changes to update');
 
       form.reset();
