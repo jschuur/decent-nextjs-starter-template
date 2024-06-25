@@ -8,7 +8,7 @@
     "dev:next": "sst dev next dev",
     "dev-next": "next dev",
     "dev:db:studio": "drizzle-kit studio",
-    "dev:db:turso": "turso dev --db-file ./db/dev.db",
+    "dev:db:turso": "turso auth login && turso dev --db-file ./db/dev.db",
     "build": "next build",
     "check": "tsc --noEmit",
     "lint": "next lint",
