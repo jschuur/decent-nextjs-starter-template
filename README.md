@@ -8,7 +8,7 @@ By [Joost Schuur](https://joostschuur.com) ([Twitter](https://twitter.com/joosts
 
 ## Usage
 
-Still a work in progress, but if you're taking an early look, start by cloning the repository:
+Preliminary instructions. Start by cloning the repository:
 
 ```
 git clone https://github.com/jschuur/decent-nextjs-starter-template
@@ -50,6 +50,9 @@ Substitute `pnpm` for your package manager of choice (npm, bun, yarn etc).
   - sample implementation of optimistic updates
 - [Sentry](https://sentry.io/): Error tracking and performance monitoring ([docs](https://docs.sentry.io/platforms/javascript/guides/nextjs/)).
 - [React Hotkeys Hook](https://react-hotkeys-hook.vercel.app/): Hotkeys ([docs](https://react-hotkeys-hook.vercel.app/docs/intro)).
+- [Tanstack Table](https://tanstack.com/table): Headless UI for building powerful tables & datagrids. ([docs](https://tanstack.com/table/latest/docs/introduction)).
+  - drag and drop row reordering based on [example](https://tanstack.com/table/v8/docs/framework/react/examples/row-dnd)
+- [dnd-kit](https://dndkit.com/): A modular toolkit for building drag & drop interfaces.([docs](https://docs.dndkit.com/)).
 
 ## Hooks
 
@@ -58,8 +61,9 @@ Substitute `pnpm` for your package manager of choice (npm, bun, yarn etc).
 ## Components
 
 - [`ConfirmationDialog`](./src/components/ConfirmationDialog.tsx): Reusable confirmation alert with callbacks.
+- [`DataTable`](./src/components/DataTable/DataTable.tsx): Data table with sorting, filtering, row reordering and row actions.
 
 ## Helpers
 
 - [`roles.ts`](./src/auth/roles.ts): Basic role-based access controls.
-- [`adminProtectedAction`](./src/auth/auth.ts): Wrapper to limit server actions to admin users.
+- [`adminProtectedAction`](./src/auth/auth.ts): shadcn/ui based [data table](https://ui.shadcn.com/docs/components/data-table) with drag and drop re-ordering and row action menu.

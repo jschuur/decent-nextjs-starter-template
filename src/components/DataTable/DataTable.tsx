@@ -1,21 +1,24 @@
 'use client';
 
+import { DragEndEvent, DragOverlay, DragStartEvent, UniqueIdentifier } from '@dnd-kit/core';
+import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import {
   ColumnDef,
-  FilterFn,
   SortingState,
+  TableOptions,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
+  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { Plus } from 'lucide-react';
-import { ComponentType, createElement, useState } from 'react';
-import { useHotkeys } from 'react-hotkeys-hook';
+import { merge } from 'lodash';
+import pluralize from 'pluralize';
+import { useMemo, useState } from 'react';
+import { useIsClient } from 'usehooks-ts';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
 import {
   Table,
   TableBody,
@@ -25,140 +28,148 @@ import {
   TableRow,
 } from '@/components/ui/table';
 
+import DataTablePagination from '@/components/DataTable/DataTablePagination';
+import DraggableRow from '@/components/DataTable/DraggableRow';
+import DraggableWrapper from '@/components/DataTable/DraggableWrapper';
+
 import { cn } from '@/lib/utils';
 
-// TODO: Don't use 'any' type.
-// TODO: Pass in filter function as prop.
-const globalFilterFunction: FilterFn<any> = (row, columnId, filterValue: string) => {
-  const filterText = filterValue.toLowerCase();
-  if (!row) return false;
+import { DraggableRowStyle } from '@/components/DataTable/DraggableRow';
 
-  // BUG: Doesn't work for tags. Filter function isn't invoked for that columnId.
-  return columnId === 'tags'
-    ? row.original.tags.some((tag: string) => tag.toLowerCase().includes(filterText))
-    : row.getValue(columnId)?.toLowerCase()?.includes(filterText) ?? false;
-};
+// based on https://tanstack.com/table/v8/docs/framework/react/examples/row-dnd
 
-type Props<T> = {
-  data: T[];
-  columns: ColumnDef<T>[];
-  canEdit?: boolean;
-  addItemTrigger?: () => void;
-  addItemButtonLabel?: string;
-  itemDialog?: ComponentType;
-  itemRowDropDown?: ComponentType;
+export type DragOverlayProp =
+  | JSX.Element
+  | ((props: { activeId: UniqueIdentifier | null }) => JSX.Element);
+
+type Props<TData, TValue> = {
+  data: TData[];
+  columns: ColumnDef<TData>[];
+  canReorder?: boolean;
+  onReorder?: (data: TData[]) => void;
+  handleDragEnd?: (event: DragEndEvent) => void;
+  handleDragStart?: (event: DragStartEvent) => void;
+  dragOverlay?: DragOverlayProp;
+  draggableRowStyle?: DraggableRowStyle;
+  paginationSize?: number;
+  paginationSteps?: number[];
+  itemCountFooter?: boolean | ((count: number) => React.ReactNode);
+  options?: Partial<TableOptions<TData>>;
   className?: string;
 };
-export default function DataTable<T>({
+export default function DataTable<TData extends { id: UniqueIdentifier }, TValue>({
   data,
   columns,
-  canEdit,
-  addItemTrigger,
-  addItemButtonLabel,
-  itemDialog,
-  itemRowDropDown,
+  onReorder,
+  handleDragEnd,
+  handleDragStart,
+  dragOverlay,
+  draggableRowStyle,
+  paginationSize,
+  paginationSteps = [10, 25, 50, 100],
+  itemCountFooter,
+  options,
   className,
-}: Props<T>) {
+}: Props<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
-  const [globalFilter, setGlobalFilter] = useState('');
+  const [pageIndex, setPageIndex] = useState(0);
+  const [pageSize, setPageSize] = useState(paginationSize || data.length);
+  const isClient = useIsClient();
+  const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
 
-  useHotkeys(
-    'a',
-    () => {
-      if (addItemTrigger) addItemTrigger();
-    },
-    { enabled: addItemTrigger && canEdit, preventDefault: true }
+  const table = useReactTable<TData>(
+    merge(
+      {
+        data: data ?? [],
+        columns,
+        getCoreRowModel: getCoreRowModel(),
+        getRowId: (row: TData) => row.id,
+        onSortingChange: setSorting,
+        getSortedRowModel: getSortedRowModel(),
+        getFilteredRowModel: getFilteredRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
+        state: {
+          sorting,
+          pagination: {
+            pageIndex,
+            pageSize,
+          },
+        },
+      },
+      options
+    )
   );
 
-  const table = useReactTable({
-    data: data ?? [],
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    onSortingChange: setSorting,
-    getSortedRowModel: getSortedRowModel(),
-    onGlobalFilterChange: setGlobalFilter,
-    globalFilterFn: globalFilterFunction,
-    getFilteredRowModel: getFilteredRowModel(),
-    state: {
-      sorting,
-      globalFilter,
-    },
-  });
+  const dataIds = useMemo<UniqueIdentifier[]>(() => data?.map(({ id }) => id), [data]);
 
-  const itemDialogElement = itemDialog ? createElement(itemDialog) : null;
+  const onDragStart = (event: DragStartEvent) => {
+    setActiveId(event.active.id);
+  };
 
-  // TODO: Use reusable sort component https://ui.shadcn.com/docs/components/data-table
+  const onDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (active && over && active.id !== over.id && onReorder) {
+      const oldIndex = dataIds.indexOf(active.id);
+      const newIndex = dataIds.indexOf(over.id);
+
+      const newOrder = arrayMove(data, oldIndex, newIndex);
+
+      if (onReorder) onReorder(newOrder);
+    }
+
+    setActiveId(null);
+  };
+
+  if (!isClient) return null;
+
+  const dragOverlayElement: DragOverlayProp =
+    typeof dragOverlay === 'function'
+      ? dragOverlay({ activeId })
+      : dragOverlay ?? (
+          <DragOverlay dropAnimation={null}>
+            {activeId ? <Separator className='mx-auto max-w-5xl bg-black' /> : null}
+          </DragOverlay>
+        );
+
   return (
     <div className={cn(className)}>
-      <div className='flex w-full items-center justify-between gap-2 pb-4'>
-        <div className=''>
-          <Input
-            placeholder='Filter items...'
-            value={globalFilter || ''}
-            onChange={(e) => setGlobalFilter(e.target.value)}
-            className='max-w-64'
-          />
-        </div>
-        {canEdit && addItemTrigger && (
-          <Button variant='outline' onClick={() => addItemTrigger()}>
-            <Plus className='mr-2 size-4' />
-            {addItemButtonLabel || 'Add Row'}
-          </Button>
-        )}
-      </div>
-
-      <div className='rounded-sm border'>
+      <DraggableWrapper
+        onDragEnd={handleDragEnd || onDragEnd}
+        onDragStart={handleDragStart || onDragStart}
+      >
         <Table>
           <TableHeader className='bg-muted'>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead
-                      key={header.id}
-                      className={cn('px-0', header.column.columnDef.meta?.classNameHeader)}
-                    >
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(header.column.columnDef.header, header.getContext())}
-                    </TableHead>
-                  );
-                })}
+                {headerGroup.headers.map((header) => (
+                  <TableHead
+                    key={header.id}
+                    className={cn('px-4', header.column.columnDef.meta?.classNameHeader)}
+                  >
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(header.column.columnDef.header, header.getContext())}
+                  </TableHead>
+                ))}
               </TableRow>
             ))}
           </TableHeader>
+
           <TableBody className='bg-white'>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => {
-                const itemRowDropdownElement = itemRowDropDown
-                  ? createElement(itemRowDropDown, {
-                      item: row.original,
-                      className: 'invisible group-hover:visible',
-                    })
-                  : null;
-
-                return (
-                  <TableRow
+              <SortableContext items={dataIds} strategy={verticalListSortingStrategy}>
+                {table.getRowModel().rows.map((row) => (
+                  <DraggableRow
                     key={row.id}
+                    row={row}
+                    id={row.id}
                     className='group'
-                    data-state={row.getIsSelected() && 'selected'}
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell
-                        className={cn('h-16 py-2', cell.column.columnDef?.meta?.classNameCell)}
-                        key={cell.id}
-                      >
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </TableCell>
-                    ))}
-                    {canEdit && (
-                      <TableCell className='py-2' key={`menu_${row.id}`}>
-                        {itemRowDropdownElement}
-                      </TableCell>
-                    )}
-                  </TableRow>
-                );
-              })
+                    style={draggableRowStyle}
+                  />
+                ))}
+                {dragOverlayElement}
+              </SortableContext>
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className='h-24 text-center'>
@@ -168,8 +179,30 @@ export default function DataTable<T>({
             )}
           </TableBody>
         </Table>
-      </div>
-      {canEdit && itemDialogElement}
+      </DraggableWrapper>
+
+      {paginationSize && (
+        <div className='border-t-[1px] bg-white p-4'>
+          <DataTablePagination
+            table={table}
+            setPageSize={setPageSize}
+            setPageIndex={setPageIndex}
+            paginationSteps={paginationSteps}
+          />
+        </div>
+      )}
+
+      {itemCountFooter && (
+        <>
+          {typeof itemCountFooter === 'function' ? (
+            itemCountFooter(data.length)
+          ) : (
+            <div className='border-t-[1px] bg-white p-4 text-sm text-primary'>
+              {`Total: ${pluralize('item', data.length, true)} `}
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 }

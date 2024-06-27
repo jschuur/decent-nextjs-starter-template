@@ -11,10 +11,10 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
+import ConfirmationDialog from '@/components/ConfirmationDialog';
+
 import useDialog from '@/hooks/useDialog';
 import useStackItems from '@/hooks/useStackItems';
-
-import ConfirmationDialog from '@/components/ConfirmationDialog';
 
 import { cn } from '@/lib/utils';
 
@@ -29,6 +29,8 @@ export default function StackTableItemDropdown({ className, item }: Props) {
   const { open } = useDialog<StackItem>('stackItem');
   const [confirmOpen, setConfirmOpen] = useState(false);
   const { deleteExistingStackItem } = useStackItems();
+
+  if (!item) return null;
 
   return (
     <>

@@ -33,7 +33,7 @@ export default function StackItemEntry({ item }: Props) {
           <CardTitle>
             {item.name}
             <div className='flex gap-2 pt-3'>
-              <div className='flex min-h-6 grow gap-2'>
+              <div className='flex gap-2'>
                 {item.tags.map((tag) => (
                   <StackItemBadge key={tag} tag={tag} />
                 ))}

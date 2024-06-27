@@ -11,6 +11,8 @@ import { env } from '@/env';
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [Google],
   debug: env.AUTH_DEBUG,
+  // FIXME
+  // @ts-ignore
   adapter: DrizzleAdapter(db, {
     usersTable: users,
     accountsTable: accounts,
@@ -33,6 +35,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return token;
     },
     // gets called every time a session is checked
+    // FIXME: https://github.com/nextauthjs/next-auth/issues/9571
+    // @ts-ignore
     session({ session, token }: { session: Session; token: JWT }) {
       // add extra fields to the session object
       session.user.id = token.id;

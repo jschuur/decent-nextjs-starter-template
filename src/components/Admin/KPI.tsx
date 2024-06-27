@@ -22,7 +22,7 @@ type Props = {
 };
 export default function KPI({ children, title, externalLink, metric, footer, className }: Props) {
   return (
-    <Card className={cn(className)}>
+    <Card className={cn('transition ease-in-out hover:bg-orange-50', className)}>
       <CardHeader className='pb-2'>
         <CardDescription>
           <span className='flex items-center justify-between gap-2'>

@@ -16,4 +16,6 @@ INSERT INTO stack_item VALUES('4a9d83eb-743d-4042-9c79-311ae144e54a','T3 Env','h
 INSERT INTO stack_item VALUES('3e3b6b45-d446-4d12-90dc-072ceca93aa6','React Hotkeys Hook','https://react-hotkeys-hook.vercel.app/docs/intro','Use hotkeys in a declarative way.',16,1718722439000,'["ui"]');
 INSERT INTO stack_item VALUES('1677a8ec-aea0-4e89-bfd6-1eb0a902a2bb','Sentry','https://docs.sentry.io/platforms/javascript/guides/nextjs/','Developer-first error tracking and performance monitoring platform.',14,1718387916000,'["tooling"]');
 INSERT INTO stack_item VALUES('073b21d9-d85f-4a55-965e-f27d6b652f67','TypeScript','https://www.typescriptlang.org/docs/','TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.',2,1717846451000,'["tooling"]');
+INSERT INTO stack_item VALUES('471994f3-edb6-4bfd-9b8f-b789551050b6','TanStack Table','https://tanstack.com/table/latest/docs/introduction','Headless UI for building powerful tables & datagrids.',18,1718974469000,'["ui"]');
+INSERT INTO stack_item VALUES('7a53d2f7-468c-4676-b9d0-894ad8642ab8','dnd-kit','https://docs.dndkit.com/',replace('A lightweight, performant, accessible and\nextensible drag & drop toolkit for React.','\n',char(10)),17,1719171079000,'["ui"]');
 COMMIT;

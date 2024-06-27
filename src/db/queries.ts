@@ -11,6 +11,17 @@ import { StackItem, StackItemInsert } from '@/lib/types';
 export async function getStackItems() {
   return db.select().from(stackItems).orderBy(asc(stackItems.position));
 }
+type ReorderStackItemsParams = {
+  data: StackItem[];
+};
+export const reorderStackItems = adminProtectedAction(async ({ data }: ReorderStackItemsParams) => {
+  // TODO: Only reorder affected range of rows
+  for (const row of data) {
+    await db.update(stackItems).set({ position: row.position }).where(eq(stackItems.id, row.id));
+  }
+
+  return db.select().from(stackItems).orderBy(asc(stackItems.position));
+});
 
 type UpdateStackItemParams = {
   id: string;

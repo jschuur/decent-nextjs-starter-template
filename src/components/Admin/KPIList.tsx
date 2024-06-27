@@ -10,7 +10,7 @@ import useStackItems from '@/hooks/useStackItems';
 import { userCount } from '@/db/queries';
 import { cn, formatDateShort } from '@/lib/utils';
 
-async function fetchGitHubStars() {
+async function fetchGitHubRepoData() {
   return fetch('https://api.github.com/repos/jschuur/decent-nextjs-starter-template').then((res) =>
     res.json()
   );
@@ -27,7 +27,7 @@ export default function KPIList({ className }: Props) {
   });
   const { data: gitHubRepo } = useQuery({
     queryKey: ['gitHubRepo'],
-    queryFn: () => fetchGitHubStars(),
+    queryFn: () => fetchGitHubRepoData(),
   });
 
   const latestStackItem = orderBy(stackItems, 'createdAt', 'desc')[0];

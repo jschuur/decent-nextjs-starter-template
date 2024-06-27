@@ -1,49 +1,35 @@
-import { Column, ColumnDef } from '@tanstack/react-table';
-import { ArrowDown, ArrowUp } from 'lucide-react';
+import { ColumnDef } from '@tanstack/react-table';
 
-import { Button } from '@/components/ui/button';
-
+import StackTableItemDropdown from '@/components/Admin/StackTableItemDropdown';
+import DataTableColumnHeader from '@/components/DataTable/DataTableColumnHeader';
+import DragHandle from '@/components/DataTable/DragHandle';
 import StackItemBadge from '@/components/Template/StackItemBadge';
 
 import { formatDateShort } from '@/lib/utils';
 
 import { StackItem } from '@/lib/types';
 
-type SortHeaderParams = {
-  column: Column<StackItem>;
-  name: string;
-};
-const sortHeader = ({ column, name }: SortHeaderParams) => {
-  const isSorted = column.getIsSorted();
-
-  return (
-    <Button variant='ghost' onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-      {name}
-      {isSorted === 'asc' ? (
-        <ArrowUp className='ml-2 h-4 w-4' />
-      ) : isSorted === 'desc' ? (
-        <ArrowDown className='ml-2 h-4 w-4' />
-      ) : (
-        <div className='w-6' />
-      )}
-    </Button>
-  );
-};
-
 export const columns: ColumnDef<StackItem>[] = [
+  {
+    accessorKey: 'reorder',
+    enableGlobalFilter: false,
+    header: undefined,
+    cell: (cell) => <DragHandle rowId={cell.row.id} className='mb-[2px]' />,
+    meta: {},
+  },
   {
     accessorKey: 'position',
     enableGlobalFilter: false,
-    header: ({ column }) => sortHeader({ column, name: '#' }),
+    header: ({ column }) => <DataTableColumnHeader column={column} title='' />,
     cell: (cell) => <span className='text-slate-500'>{cell.getValue() as number}</span>,
     meta: {
-      classNameHeader: 'justify-end',
-      classNameCell: 'text-right',
+      classNameHeader: 'px-0',
+      classNameCell: 'text-right tabular-nums px-0',
     },
   },
   {
     accessorKey: 'name',
-    header: ({ column }) => sortHeader({ column, name: 'Name' }),
+    header: ({ column }) => <DataTableColumnHeader column={column} title='Name' />,
     cell: (cell) => {
       const link = cell.row.original.link;
       const name = cell.getValue<string>();
@@ -60,17 +46,20 @@ export const columns: ColumnDef<StackItem>[] = [
   {
     accessorKey: 'description',
     enableGlobalFilter: true,
-    header: ({ column }) => sortHeader({ column, name: 'Description' }),
+    header: ({ column }) => <DataTableColumnHeader column={column} title='Description' />,
   },
   {
     accessorKey: 'tags',
+    // FIXME: This doesn't work. When I was using a custom filter function, it wasn't invoked for this column.
     enableGlobalFilter: true,
+    // Does this work for substrings? Or do we need a custom filter function?
+    filterFn: 'arrIncludesSome',
     header: 'Tags',
     cell: (cell) => {
       const tags = cell.getValue<string[]>();
 
       return (
-        <div className='flex gap-2'>
+        <div className='flex min-h-6 gap-2'>
           {tags.map((tag) => (
             <StackItemBadge key={tag} tag={tag} />
           ))}
@@ -84,9 +73,17 @@ export const columns: ColumnDef<StackItem>[] = [
   {
     accessorKey: 'createdAt',
     enableGlobalFilter: false,
-    header: ({ column }) => sortHeader({ column, name: 'Added' }),
+    header: ({ column }) => <DataTableColumnHeader column={column} title='Added' />,
     cell: (cell) => (
       <span className='whitespace-nowrap'>{formatDateShort(cell.getValue() as Date)}</span>
+    ),
+  },
+  {
+    accessorKey: 'dropdown',
+    enableGlobalFilter: false,
+    header: '',
+    cell: (cell) => (
+      <StackTableItemDropdown item={cell.row.original} className='invisible group-hover:visible' />
     ),
   },
 ];

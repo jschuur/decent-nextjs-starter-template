@@ -1,12 +1,18 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 import { toast } from 'sonner';
+import { v4 as uuidv4 } from 'uuid';
 
-import { createStackItem, deleteStackItem, getStackItems, updateStackItem } from '@/db/queries';
+import {
+  createStackItem,
+  deleteStackItem,
+  getStackItems,
+  reorderStackItems,
+  updateStackItem,
+} from '@/db/queries';
 import { queryClientAtom } from '@/stores/jotai';
 
 import { StackItem } from '@/lib/types';
-import { v4 as uuidv4 } from 'uuid';
 
 // Basic custom hook to later abstract away custom logic
 export default function useStackItems() {
@@ -14,6 +20,42 @@ export default function useStackItems() {
   const query = useQuery({
     queryKey: ['stackItems'],
     queryFn: () => getStackItems(),
+  });
+
+  const { mutateAsync: reorderExistingStackItems } = useMutation({
+    mutationFn: reorderStackItems,
+    onMutate: async ({ data }) => {
+      let previousStackItems: StackItem[] = [];
+
+      // Cancel any outgoing re-fetches (so they don't overwrite our optimistic update)
+      if (queryClient) {
+        await queryClient.cancelQueries({ queryKey: ['stackItems'] });
+        previousStackItems = queryClient.getQueryData<StackItem[]>(['stackItems']) || [];
+
+        // Optimistically update the whole list of stack items
+        queryClient.setQueryData(['stackItems'], data);
+      } else {
+        toast.error('Failed to update stack item: queryClient null');
+      }
+
+      return { previousStackItems };
+    },
+    // Restore the previous stack item list if the mutation fails
+    onError: (err, stackItem, context) => {
+      if (queryClient && context) {
+        queryClient.setQueryData(['stackItems'], context.previousStackItems);
+
+        toast.error(`Failed to reorder stack items: ${err.message}`);
+      }
+    },
+    // Always refetch after error or success:
+    onSuccess: (stackItems: StackItem[]) => {
+      if (queryClient && stackItems[0]) {
+        queryClient.invalidateQueries({ queryKey: ['stackItems'] });
+
+        toast.success(`New stack item order saved successfully`);
+      }
+    },
   });
 
   const { mutateAsync: updateExistingStackItem } = useMutation({
@@ -140,5 +182,11 @@ export default function useStackItems() {
     },
   });
 
-  return { updateExistingStackItem, createNewStackItem, deleteExistingStackItem, ...query };
+  return {
+    updateExistingStackItem,
+    createNewStackItem,
+    deleteExistingStackItem,
+    reorderExistingStackItems,
+    ...query,
+  };
 }

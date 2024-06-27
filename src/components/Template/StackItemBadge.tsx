@@ -25,7 +25,7 @@ export default function StackItemBadge({ tag }: Props) {
       key={tag}
       className={cn(
         badgeColors[tag as keyof typeof badgeColors] || 'bg-red-300',
-        'pointer-events-none text-xs font-medium uppercase tracking-wider text-gray-800'
+        'pointer-events-none flex items-center justify-center text-xs font-medium uppercase tracking-wider text-gray-800'
       )}
     >
       {tag}

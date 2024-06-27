@@ -17,7 +17,7 @@ export default async function AdminPage() {
     <div>
       {!userIsAdmin && (
         <NoticeCallout title='Read only access'>
-          As a non-admin user, so you only have limited access to this page.
+          As a non-admin user you only have limited access to this page.
         </NoticeCallout>
       )}
       <KPIList className='py-2 pb-4' />
