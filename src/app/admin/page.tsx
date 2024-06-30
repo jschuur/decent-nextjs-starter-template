@@ -14,7 +14,7 @@ export default async function AdminPage() {
   if (!session) return redirect('/denied');
 
   return (
-    <div>
+    <div className='py-4'>
       {!userIsAdmin && (
         <NoticeCallout title='Read only access'>
           As a non-admin user you only have limited access to this page.

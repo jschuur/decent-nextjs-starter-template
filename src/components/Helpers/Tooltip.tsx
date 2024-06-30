@@ -25,9 +25,7 @@ export default function Tooltip({ children, tooltip, delayDuration = 1000, asChi
   return (
     <TooltipRoot onOpenChange={updateContent} delayDuration={delayDuration}>
       <TooltipTrigger asChild={asChild}>{children}</TooltipTrigger>
-      <TooltipContent className='z-10'>
-        <p>{content}</p>
-      </TooltipContent>
+      <TooltipContent className='z-10'>{content}</TooltipContent>
     </TooltipRoot>
   );
 }

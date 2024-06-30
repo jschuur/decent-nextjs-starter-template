@@ -84,11 +84,15 @@
   }
 
   h1 {
-    @apply pb-1 text-xl font-semibold sm:text-2xl;
+    @apply pb-1 text-xl font-semibold sm:text-3xl;
   }
 
   h2 {
-    @apply pb-1 text-lg font-medium sm:text-xl;
+    @apply pb-1 text-lg font-medium sm:text-2xl;
+  }
+
+  p {
+    @apply leading-relaxed;
   }
 
   p:not(:last-child) {
@@ -101,5 +105,10 @@
 
   p > a {
     @apply text-link;
+  }
+
+  .text-stroke-black {
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
   }
 }

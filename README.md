@@ -62,6 +62,7 @@ Substitute `pnpm` for your package manager of choice (npm, bun, yarn etc).
 
 - [`ConfirmationDialog`](./src/components/ConfirmationDialog.tsx): Reusable confirmation alert with callbacks.
 - [`DataTable`](./src/components/DataTable/DataTable.tsx): Data table with sorting, filtering, row reordering and row actions.
+- [`Nav`](./src/components/Site/Nav.tsx): Menu entry with current path highlighting.
 
 ## Helpers
 

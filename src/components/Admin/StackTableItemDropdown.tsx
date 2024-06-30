@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import ConfirmationDialog from '@/components/ConfirmationDialog';
+import ConfirmationDialog from '@/components/Helpers/ConfirmationDialog';
 
 import useDialog from '@/hooks/useDialog';
 import useStackItems from '@/hooks/useStackItems';

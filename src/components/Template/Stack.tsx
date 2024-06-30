@@ -25,9 +25,9 @@ export default function Stack() {
   const sortedStackItems = sortBy(stackItems, 'position');
 
   return (
-    <div className='pb-4'>
-      <div className='flex items-center justify-between pb-2'>
-        <h2 className='pb-0'>Stack</h2>
+    <div className='py-4'>
+      <div className='flex items-center justify-center py-2'>
+        <h1 className='text-center'>Decent Template Stack</h1>
       </div>
       {sortedStackItems.length > 0 ? (
         <div className='grid auto-rows-fr grid-cols-1 gap-4 pt-2 md:grid-cols-2 lg:grid-cols-3'>

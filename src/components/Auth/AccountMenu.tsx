@@ -32,9 +32,6 @@ export default function AccountMenu({ children, user }: Props) {
           <div className='text-[7pt] font-normal text-slate-500'>{user.email}</div>
         </DropdownMenuLabel>
         <DropdownMenuItem asChild>
-          <Link href='/public'>Public Page</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
           <Link href='/admin'>Admin Dashboard</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
