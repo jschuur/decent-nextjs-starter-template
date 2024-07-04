@@ -42,7 +42,7 @@ export default function RootLayout({
         <Providers>
           <ReactQueryProvider>
             <Header />
-            <main className='container max-w-5xl grow px-4 sm:px-8'>{children}</main>
+            <main className='container max-w-5xl grow px-6 sm:px-8'>{children}</main>
             <Footer />
 
             <Toaster richColors position='bottom-center' />

@@ -34,7 +34,7 @@ type Props = {
 };
 export default function Features({ className }: Props) {
   return (
-    <PageWide className='border-y border-slate-300 bg-white py-8'>
+    <PageWide className='border-y border-slate-300 bg-white px-4 py-8'>
       <div className={cn('mx-auto max-w-5xl px-4', className)}>
         <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
           <Feature Icon={Building} title='Built on widely adopted solutions'>

@@ -1,6 +1,16 @@
-export default function HeroHeader() {
+import { cn } from '@/lib/utils';
+
+type Props = {
+  className?: string;
+};
+export default function HeroHeader({ className }: Props) {
   return (
-    <h1 className='bg-gradient-to-r from-cyan-400 to-blue-700 bg-clip-text py-8 text-center font-sans text-5xl font-black leading-snug text-transparent md:text-[5rem] md:leading-tight'>
+    <h1
+      className={cn(
+        'bg-gradient-to-r from-cyan-400 to-blue-700 bg-clip-text text-center font-sans text-5xl font-black leading-snug text-transparent md:text-[5rem] md:leading-tight',
+        className
+      )}
+    >
       A Decent{' '}
       <span className='underline decoration-amber-400 decoration-8 underline-offset-[12px]'>
         Next.js
