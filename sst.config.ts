@@ -16,6 +16,7 @@ export default $config({
     const { parsed: environment } = dotenv.config({ path: envFile });
 
     const config: sst.aws.NextjsArgs = {
+      openNextVersion: '3.0.6',
       environment: {
         SST_STAGE: $app.stage,
         ...environment,
@@ -26,8 +27,18 @@ export default $config({
     };
 
     if (!$dev) {
-      if (env.SITE_DOMAIN) config.domain = env.SITE_DOMAIN;
-      if (env.WARM > 0) config.warm = env.WARM;
+      if (env.SITE_HOSTNAME) config.domain = env.SITE_HOSTNAME;
+      if (process.env.WARM) config.warm = parseInt(process.env.WARM || '0', 10);
+      // Check https://github.com/sst/ion/issues/632 if this is still needed
+      if (env.CLOUDFRONT_DISTRIBUTION_ID)
+        config.permissions = [
+          {
+            actions: ['cloudfront:CreateInvalidation'],
+            resources: [
+              `arn:aws:cloudfront::*:distribution/${env.CLOUDFRONT_DISTRIBUTION_ID || '*'}`,
+            ],
+          },
+        ];
     }
 
     new sst.aws.Nextjs('Site', config);

@@ -24,7 +24,7 @@ git clone https://github.com/jschuur/decent-nextjs-starter-template
 8. For SST based [live development](https://ion.sst.dev/docs/live/), set up your AWS credentials manually in `~/aws/credentials` or [via their CLI](https://docs.aws.amazon.com/cli/v1/userguide/cli-chap-configure.html). If you don't want to use SST just yet, you can run local dev via `pnpm run dev-nosst`.
 9. For Auth.js, set up credentials for the [Google Provider](https://next-auth.js.org/providers/google) for `AUTH_GOOGLE_ID` and `AUTH_GOOGLE_SECRET` (or update `auth.ts` to use a different one). Don't forget the random `AUTH_SECRET` string.
 10. Test auth via the login button in the header. If you see an error, you might not have set the correct URLs for your Google OAuth credentials for 'Authorized JavaScript origins' (http://localhost:3000) and 'Authorized redirect URIs' (http://localhost:3000/api/auth/callback/google).
-11. To deploy, run `pnpm run deploy` (for a staging build) or `pnpm run deploy:prod`. This deploys to AWS via SST. Cloudflare deploys are also supported by SST Ion. Or use the Vercel CLI to [deploy to Vercel](https://vercel.com/docs/cli/deploy). Create preview and production env files under `.env.preview` and `.env.production` respectively. Set a `SITE_DOMAIN` to define the [hostname](https://ion.sst.dev/docs/custom-domains/) for the site.
+11. To deploy, run `pnpm run deploy` (for a staging build) or `pnpm run deploy:prod`. This deploys to AWS via SST. Cloudflare deploys are also supported by SST Ion. Or use the Vercel CLI to [deploy to Vercel](https://vercel.com/docs/cli/deploy). Create preview and production env files under `.env.preview` and `.env.production` respectively. Set a `SITE_HOSTNAME` to define the [hostname](https://ion.sst.dev/docs/custom-domains/) for the site.
 
 Substitute `pnpm` for your package manager of choice (npm, bun, yarn etc).
 
@@ -32,7 +32,7 @@ Substitute `pnpm` for your package manager of choice (npm, bun, yarn etc).
 
 - [Next.js](https://nextjs.org/) React framework, configured for Tailwind, TypeScript, ESlint and app router ([docs](https://nextjs.org/docs)).
 - [shadcn/ui](https://ui.shadcn.com/) Accessible, customisable UI components based on Radix. Default style. Slate base colour with CSS variables for colour, by [shadcn](https://github.com/shadcn) ([docs](https://ui.shadcn.com/docs)).
-  - Pre-installed components: [Alert](https://ui.shadcn.com/docs/components/alert), [Avatar](https://ui.shadcn.com/docs/components/avatar), [Badge](https://ui.shadcn.com/docs/components/badge), [Button](https://ui.shadcn.com/docs/components/button), [Card](https://ui.shadcn.com/docs/components/card), [Checkbox](https://ui.shadcn.com/docs/components/checkbox), [Command](https://ui.shadcn.com/docs/components/command), [Dialog](https://ui.shadcn.com/docs/components/dialog), [Form](https://ui.shadcn.com/docs/components/form), [Input](https://ui.shadcn.com/docs/components/input), [Label](https://ui.shadcn.com/docs/components/label), [Popover](https://ui.shadcn.com/docs/components/popover), [Radio Group](https://ui.shadcn.com/docs/components/radio-group), [Select](https://ui.shadcn.com/docs/components/select), [Sonner](https://ui.shadcn.com/docs/components/sonner), [Switch](https://ui.shadcn.com/docs/components/switch), [Tabs](https://ui.shadcn.com/docs/components/tabs), [Textarea](https://ui.shadcn.com/docs/components/textarea), [Tooltip](https://ui.shadcn.com/docs/components/tooltip)
+  - Pre-installed components: [Alert](https://ui.shadcn.com/docs/components/alert), [Avatar](https://ui.shadcn.com/docs/components/avatar), [Badge](https://ui.shadcn.com/docs/components/badge), [Button](https://ui.shadcn.com/docs/components/button), [Card](https://ui.shadcn.com/docs/components/card), [Checkbox](https://ui.shadcn.com/docs/components/checkbox), [Command](https://ui.shadcn.com/docs/components/command), [Dialog](https://ui.shadcn.com/docs/components/dialog), [Form](https://ui.shadcn.com/docs/components/form), [Input](https://ui.shadcn.com/docs/components/input), [Label](https://ui.shadcn.com/docs/components/label), [Popover](https://ui.shadcn.com/docs/components/popover), [Radio Group](https://ui.shadcn.com/docs/components/radio-group), [Select](https://ui.shadcn.com/docs/components/select), [Sonner](https://ui.shadcn.com/docs/components/sonner), [Switch](https://ui.shadcn.com/docs/components/switch), [Table](https://ui.shadcn.com/docs/components/table), [Tabs](https://ui.shadcn.com/docs/components/tabs), [Textarea](https://ui.shadcn.com/docs/components/textarea), [Tooltip](https://ui.shadcn.com/docs/components/tooltip)
   - VS Code extensions: [shadcn/ui](https://marketplace.visualstudio.com/items?itemName=SuhelMakkad.shadcn-ui) (by [Suhel Makkad](https://github.com/SuhelMakkad)), [shadcn/ui snippets](https://marketplace.visualstudio.com/items?itemName=VeroXyle.shadcn-ui-snippets) (by [Neeraj Dalal](https://github.com/nrjdalal)).
   - More at [awesome-shadcn-ui](https://github.com/birobirobiro/awesome-shadcn-ui).
 - [React Hook Form](https://react-hook-form.com/): Performant, flexible and extensible forms with easy-to-use validation ([docs](https://react-hook-form.com/get-started)).
@@ -61,10 +61,12 @@ Substitute `pnpm` for your package manager of choice (npm, bun, yarn etc).
 ## Components
 
 - [`ConfirmationDialog`](./src/components/ConfirmationDialog.tsx): Reusable confirmation alert with callbacks.
-- [`DataTable`](./src/components/DataTable/DataTable.tsx): Data table with sorting, filtering, row reordering and row actions.
-- [`Nav`](./src/components/Site/Nav.tsx): Menu entry with current path highlighting.
+- [`DataTable`](./src/components/DataTable/DataTable.tsx): shadcn/ui based [data table](https://ui.shadcn.com/docs/components/data-table) with drag and drop re-ordering and row action menu.
+- [`NavItem`](./src/components/Site/NavItem.tsx): Menu entry with current path highlighting.
 
 ## Helpers
 
 - [`roles.ts`](./src/auth/roles.ts): Basic role-based access controls.
-- [`adminProtectedAction`](./src/auth/auth.ts): shadcn/ui based [data table](https://ui.shadcn.com/docs/components/data-table) with drag and drop re-ordering and row action menu.
+- [`adminProtectedAction`](./src/auth/auth.ts): Wrapper function for calling admin user only server actions.
+- [`/api/revalidate`](./src/app/api/revalidate/route.ts): Trigger `revalidatePath` or `revalidateTag` for [on-demand ISR revalidation](https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration#using-on-demand-revalidation).
+- [`siteUrl`](./src/lib/utils.ts): Derive site URL from VERCEL_URL or `SITE_HOSTNAME`/`SITE_PROTOCOL`.
