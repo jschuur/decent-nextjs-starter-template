@@ -7,7 +7,7 @@ export default function HeroHeader({ className }: Props) {
   return (
     <h1
       className={cn(
-        'bg-gradient-to-r from-cyan-400 to-blue-700 bg-clip-text text-center font-sans text-5xl font-black leading-snug text-transparent md:text-[5rem] md:leading-tight',
+        'text-balance bg-gradient-to-br from-cyan-400 to-blue-700 bg-clip-text text-center font-sans text-5xl font-black leading-snug text-transparent md:text-[5rem] md:leading-tight',
         className
       )}
     >
